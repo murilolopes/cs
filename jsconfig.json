@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ],
+            "@core/*": [
+                "src/@core/*"
+            ],
+            "@views/*": ["src/views/*"]
+        }
+    },
+    "vueCompilerOptions": {
+        "target": 2.7,
+        "extensions": [
+            ".vue"
+        ]
+    }
+}

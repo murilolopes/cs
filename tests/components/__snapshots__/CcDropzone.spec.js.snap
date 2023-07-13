@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CCDropzone.vue should render correctly 1`] = `
+<div
+  class="cc-dropzone cc-dropzone-min-height"
+>
+  <div
+    class="dropzone-container"
+  >
+    <input
+      accept=".xml"
+      class="hidden-input"
+      id="fileInput"
+      name="file"
+      required="required"
+      type="file"
+    />
+     
+    <label
+      class="file-label"
+      for="fileInput"
+    >
+      <h4
+        class="text-primary"
+      >
+        Arraste seu arquivo até aqui ou clique para procurar.
+      </h4>
+       
+      <span>
+        Envie seu arquivo no formato XML.
+      </span>
+    </label>
+     
+    <!---->
+  </div>
+</div>
+`;

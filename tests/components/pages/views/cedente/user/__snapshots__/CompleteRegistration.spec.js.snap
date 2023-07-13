@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CompleteRegistration.vue Should render correctly 1`] = `
+<div>
+  <b-card-stub
+    bodytag="div"
+    footertag="div"
+    headertag="div"
+    subtitletag="h6"
+    subtitletextvariant="muted"
+    tag="div"
+    titletag="h4"
+  >
+    <div
+      class="d-flex flex-row justify-content-between align-items-start"
+    >
+      <div
+        class="d-flex flex-column align-items-start mb-1 p-0"
+      >
+        <p
+          class="h3 mb-0"
+        >
+          Grupo econômico
+        </p>
+         
+        <h3
+          class="text-dark mb-2"
+        >
+          
+        </h3>
+         
+        <span
+          class="bs-height-lg"
+        >
+          Preencha e envie as informações referentes à cada Matriz registrada
+        </span>
+      </div>
+       
+      <div
+        class="d-flex flex-row align-items-center justify-content-end"
+      >
+        <b-button-stub
+          tag="button"
+          target="_self"
+          type="button"
+          variant="outline-primary"
+        >
+          Incluir CNPJ +
+        </b-button-stub>
+      </div>
+    </div>
+     
+    <b-row-stub
+      alignv="start"
+      tag="div"
+    />
+  </b-card-stub>
+</div>
+`;

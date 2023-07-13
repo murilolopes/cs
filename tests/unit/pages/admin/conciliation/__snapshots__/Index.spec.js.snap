@@ -1,0 +1,493 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Index.vue Should render correctly 1`] = `
+<div>
+  <div
+    class="file-manager-application"
+  >
+    <div
+      class="content-overlay"
+    />
+     
+    <div
+      class="header-navbar-shadow"
+    />
+     
+    <div
+      class="content-area-wrapper container-xxl p-0 overflow-visible"
+    >
+      <div
+        class="sidebar-left"
+      >
+        <div
+          class="sidebar"
+        >
+          <div
+            class="sidebar-file-manager"
+          >
+            <div
+              class="sidebar-inner"
+            >
+              <div
+                class="sidebar-list"
+              >
+                <div
+                  class="list-group p-2"
+                >
+                  <h3
+                    class="mt-1"
+                  >
+                    Filtrar por
+                  </h3>
+                   
+                  <div
+                    class="mt-2"
+                  >
+                    <v-select-stub
+                      autocomplete="off"
+                      autoscroll="true"
+                      calculateposition="[Function]"
+                      clearable="true"
+                      clearsearchonblur="[Function]"
+                      clearsearchonselect="true"
+                      closeonselect="true"
+                      components="[object Object]"
+                      createoption="[Function]"
+                      dir="auto"
+                      dropdownshouldopen="[Function]"
+                      filter="[Function]"
+                      filterable="true"
+                      filterby="[Function]"
+                      getoptionkey="[Function]"
+                      getoptionlabel="[Function]"
+                      label="label"
+                      mapkeydown="[Function]"
+                      ontab="[Function]"
+                      options=""
+                      placeholder="Cedente/grupo econômico"
+                      reduce="[Function]"
+                      searchable="true"
+                      searchinputqueryselector="[type=search]"
+                      selectable="[Function]"
+                      selectonkeycodes="13"
+                      transition="vs__fade"
+                      uid="1"
+                      value=""
+                    />
+                  </div>
+                   
+                  <div
+                    class="mt-2"
+                  >
+                    <flat-pickr-stub
+                      class="form-control"
+                      config="[object Object]"
+                      events="onChange,onClose,onDestroy,onMonthChange,onOpen,onYearChange"
+                      placeholder="Vencimento"
+                      value=""
+                    />
+                  </div>
+                   
+                  <div
+                    class="mt-2"
+                  >
+                    <v-select-stub
+                      autocomplete="off"
+                      autoscroll="true"
+                      calculateposition="[Function]"
+                      clearable="true"
+                      clearsearchonblur="[Function]"
+                      clearsearchonselect="true"
+                      closeonselect="true"
+                      components="[object Object]"
+                      createoption="[Function]"
+                      dir="auto"
+                      dropdownshouldopen="[Function]"
+                      filter="[Function]"
+                      filterable="true"
+                      filterby="[Function]"
+                      getoptionkey="[Function]"
+                      getoptionlabel="[Function]"
+                      label="label"
+                      mapkeydown="[Function]"
+                      ontab="[Function]"
+                      options=""
+                      placeholder="Credenciadora"
+                      reduce="[Function]"
+                      searchable="true"
+                      searchinputqueryselector="[type=search]"
+                      selectable="[Function]"
+                      selectonkeycodes="13"
+                      transition="vs__fade"
+                      uid="2"
+                      value=""
+                    />
+                  </div>
+                   
+                  <div
+                    class="mt-2"
+                  >
+                    <v-select-stub
+                      autocomplete="off"
+                      autoscroll="true"
+                      calculateposition="[Function]"
+                      clearable="true"
+                      clearsearchonblur="[Function]"
+                      clearsearchonselect="true"
+                      closeonselect="true"
+                      components="[object Object]"
+                      createoption="[Function]"
+                      dir="auto"
+                      dropdownshouldopen="[Function]"
+                      filter="[Function]"
+                      filterable="true"
+                      filterby="[Function]"
+                      getoptionkey="[Function]"
+                      getoptionlabel="[Function]"
+                      label="label"
+                      mapkeydown="[Function]"
+                      ontab="[Function]"
+                      options=""
+                      placeholder="Bandeira"
+                      reduce="[Function]"
+                      searchable="true"
+                      searchinputqueryselector="[type=search]"
+                      selectable="[Function]"
+                      selectonkeycodes="13"
+                      transition="vs__fade"
+                      uid="3"
+                      value=""
+                    />
+                  </div>
+                   
+                  <div
+                    class="mt-2"
+                  >
+                    <v-select-stub
+                      autocomplete="off"
+                      autoscroll="true"
+                      calculateposition="[Function]"
+                      clearable="true"
+                      clearsearchonblur="[Function]"
+                      clearsearchonselect="true"
+                      closeonselect="true"
+                      components="[object Object]"
+                      createoption="[Function]"
+                      dir="auto"
+                      dropdownshouldopen="[Function]"
+                      filter="[Function]"
+                      filterable="true"
+                      filterby="[Function]"
+                      getoptionkey="[Function]"
+                      getoptionlabel="[Function]"
+                      label="label"
+                      mapkeydown="[Function]"
+                      multiple="true"
+                      ontab="[Function]"
+                      options="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"
+                      placeholder="Status"
+                      reduce="[Function]"
+                      searchable="true"
+                      searchinputqueryselector="[type=search]"
+                      selectable="[Function]"
+                      selectonkeycodes="13"
+                      transition="vs__fade"
+                      uid="4"
+                      value=""
+                    />
+                  </div>
+                   
+                  <div
+                    class="mt-2 d-flex justify-content-center"
+                  >
+                    <b-button-stub
+                      class="d-flex align-items-center"
+                      tag="button"
+                      target="_self"
+                      type="button"
+                      variant="flat-primary"
+                    >
+                       Limpar filtros 
+                      <feather-icon-stub
+                        class="ml-2"
+                        icon="RotateCcwIcon"
+                        size="22"
+                      />
+                    </b-button-stub>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+       
+      <div
+        class="content-right"
+      >
+        <div
+          class="content-wrapper container-xxl p-0"
+        >
+          <div
+            class="body-content-overlay"
+          />
+           
+          <div
+            class="content-body"
+          >
+            <div
+              class="file-manager-main-content"
+            >
+              <div
+                class="file-manager-content-body h-100"
+              >
+                <div
+                  class="d-flex justify-content-between align-items-center"
+                >
+                  <div
+                    class="justify-content-between align-items-center"
+                  >
+                    <div
+                      class="d-flex"
+                    >
+                      <div>
+                        <b-button-stub
+                          class="mr-2"
+                          disabled="true"
+                          id="conciliateButton"
+                          tag="button"
+                          target="_self"
+                          type="button"
+                          variant="primary"
+                        >
+                          
+                          Dar baixa em selecionados
+                          
+                          <img
+                            class="img-icon"
+                            height="18"
+                            src="@/assets/images/receipt_off_icon.svg"
+                            width="18"
+                          />
+                        </b-button-stub>
+                      </div>
+                       
+                      <feather-icon-stub
+                        class="arrow"
+                        icon="ArrowRightIcon"
+                        size="24"
+                      />
+                       
+                      <div
+                        class="ml-2"
+                      >
+                        <span>
+                           URs selecionadas 
+                        </span>
+                         
+                        <h3>
+                          R$ 0,00
+                        </h3>
+                      </div>
+                    </div>
+                     
+                    <div
+                      class="mt-2"
+                    >
+                      <b-form-checkbox-stub
+                        class="mr-3"
+                        id="selectAllCheckBox"
+                        value="true"
+                      >
+                        
+                        Selecionar todos
+                      
+                      </b-form-checkbox-stub>
+                    </div>
+                  </div>
+                   
+                  <div>
+                    <b-button-stub
+                      tag="button"
+                      target="_self"
+                      type="button"
+                      variant="outline-primary"
+                    >
+                      
+                      Conciliação por upload
+                      
+                      <img
+                        class="img-icon"
+                        height="17"
+                        src="@/assets/images/export_icon.svg"
+                        width="16"
+                      />
+                    </b-button-stub>
+                     
+                    <div
+                      class="d-flex align-items-center mt-2 justify-content-end"
+                    >
+                      <label
+                        class="mb-0"
+                      >
+                        Mostrar
+                      </label>
+                       
+                      <v-select-stub
+                        autocomplete="off"
+                        autoscroll="true"
+                        calculateposition="[Function]"
+                        class="per-page-selector d-inline-block mx-50"
+                        clearsearchonblur="[Function]"
+                        clearsearchonselect="true"
+                        closeonselect="true"
+                        components="[object Object]"
+                        createoption="[Function]"
+                        dir="auto"
+                        dropdownshouldopen="[Function]"
+                        filter="[Function]"
+                        filterable="true"
+                        filterby="[Function]"
+                        getoptionkey="[Function]"
+                        getoptionlabel="[Function]"
+                        label="label"
+                        mapkeydown="[Function]"
+                        ontab="[Function]"
+                        options="[object Object],[object Object],[object Object]"
+                        placeholder=""
+                        reduce="[Function]"
+                        searchable="true"
+                        searchinputqueryselector="[type=search]"
+                        selectable="[Function]"
+                        selectonkeycodes="13"
+                        transition="vs__fade"
+                        uid="5"
+                        value="10"
+                      />
+                       
+                      <label>
+                        registros
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                 
+                <div
+                  class="mt-1"
+                >
+                  <b-table-stub
+                    class="mb-0"
+                    currentpage="1"
+                    emptyfilteredtext="There are no records matching your request"
+                    emptytext="There are no records to show"
+                    fields="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]"
+                    filterdebounce="0"
+                    filterfunction="[Function]"
+                    filterignoredfields=""
+                    filterincludedfields=""
+                    hover="true"
+                    id="conciliation-table"
+                    items=""
+                    labelsortasc="Click to sort Ascending"
+                    labelsortclear="Click to clear sorting"
+                    labelsortdesc="Click to sort Descending"
+                    perpage="10"
+                    responsive="true"
+                    selectable="true"
+                    selectedvariant="active"
+                    selectmode="multi"
+                    sortcompare="[Function]"
+                    sortcompareoptions="[object Object]"
+                    sortdirection="asc"
+                    value=""
+                  />
+                   
+                  <div
+                    class="cc-datatable-header-bg px-2 py-1"
+                  >
+                    <div
+                      class="d-flex align-items-center justify-content-end"
+                    >
+                      <span
+                        class="h4 mr-2 mb-0"
+                      >
+                         Total em URs disponíveis 
+                      </span>
+                       
+                      <h2
+                        class="mb-0"
+                      >
+                         R$ 0,00 
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                 
+                <div
+                  class="d-flex align-items-center"
+                >
+                  <div
+                    class="d-flex align-items-center mt-1"
+                  >
+                    <b-button-stub
+                      class="mr-2"
+                      tag="button"
+                      target="_self"
+                      type="button"
+                      variant="flat-primary"
+                    >
+                      
+                      Exportar para Excel
+                      
+                      <img
+                        class="img-icon"
+                        height="17"
+                        src="@/assets/images/export_icon.svg"
+                        width="16"
+                      />
+                    </b-button-stub>
+                     
+                    <span
+                      class="mb-0 h5 mr-2"
+                      style="display: none;"
+                    >
+                       Mostrando de 1 a 10 de 0 registros 
+                    </span>
+                  </div>
+                   
+                  <div
+                    class="align-items-center mt-1 left-auto"
+                  >
+                    <b-pagination-stub
+                      align="left"
+                      arialabel="Pagination"
+                      class="mb-0"
+                      disabled="true"
+                      ellipsistext="…"
+                      firstnumber="true"
+                      firsttext="«"
+                      labelfirstpage="Go to first page"
+                      labellastpage="Go to last page"
+                      labelnextpage="Go to next page"
+                      labelpage="[Function]"
+                      labelprevpage="Go to previous page"
+                      lastnumber="true"
+                      lasttext="»"
+                      limit="5"
+                      nexttext="›"
+                      perpage="10"
+                      prevtext="‹"
+                      totalrows="0"
+                      value="1"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

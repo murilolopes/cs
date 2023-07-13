@@ -1,0 +1,127 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreditAcquirerSlider.vue should render correctly 1`] = `
+<div>
+  <div
+    class="d-flex flex-row align-items-center p-0 mb-2"
+  >
+    <div
+      class="d-flex flex-column justify-content-center align-items-center w-25 text-center"
+    >
+      <b-img-stub
+        alt="Logo da credenciadora"
+        blankcolor="transparent"
+        height="36px"
+        src="x"
+        width="104px"
+      />
+       
+      <p>
+        
+      </p>
+       
+      <h3>
+        Taxa de 1.85%
+      </h3>
+    </div>
+     
+    <div
+      class="d-flex flex-column align-items-start p-0 w-75"
+    >
+      <div
+        class="d-flex flex-row justify-content-between align-items-start p-0 w-100"
+      >
+        <p
+          class="mb-0"
+        >
+          Selecionado
+        </p>
+         
+        <p
+          class="mb-0"
+        >
+          Total disponível
+        </p>
+      </div>
+       
+      <vue-slider-stub
+        class="w-100 mt-1 mb-1 cc-slider"
+        clickable="true"
+        datalabel="label"
+        datavalue="value"
+        direction="ltr"
+        dotsize="14"
+        duration="0.5"
+        enablecross="true"
+        interval="0.01"
+        lazy="true"
+        max="100"
+        min="0"
+        order="true"
+        process="true"
+        tooltip="active"
+        tooltipformatter="[Function]"
+        usekeyboard="true"
+        value="0"
+      />
+       
+      <div
+        class="d-flex flex-row justify-content-between align-items-start w-100 mb-0"
+      >
+        <div
+          class="d-flex align-items-center"
+        >
+          <validation-provider-stub
+            bails="true"
+            custommessages="[object Object]"
+            debounce="0"
+            detectinput="true"
+            mode="aggressive"
+            name="selectedValue"
+            rules="multipleOf1000"
+            skipifempty="true"
+            tag="span"
+            vid="selectedValue"
+          />
+           
+          <b-badge-stub
+            class="ml-1 border-warning text-black"
+            tag="span"
+            target="_self"
+            variant="light-warning"
+          >
+            Taxa efetiva 1,85%
+          </b-badge-stub>
+        </div>
+         
+        <validation-provider-stub
+          bails="true"
+          custommessages="[object Object]"
+          debounce="0"
+          detectinput="true"
+          mode="aggressive"
+          name="totalAmountValue"
+          rules="multipleOf1000"
+          skipifempty="true"
+          tag="span"
+          vid="totalAmountValue"
+        />
+      </div>
+    </div>
+  </div>
+   
+  <b-card-actions-stub
+    actioncollapse="true"
+    class="card-actions-border"
+    collapsed="true"
+    title="Valor acumulado no período"
+  >
+    <vue-apex-charts-stub
+      height="200"
+      options="[object Object]"
+      series="[object Object]"
+      width="100%"
+    />
+  </b-card-actions-stub>
+</div>
+`;

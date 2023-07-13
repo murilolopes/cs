@@ -1,0 +1,64 @@
+@import 'vue-multiselect/dist/vue-multiselect.min';
+
+.multiselect{
+  font-size: 14px;
+  min-height: 38px;
+  max-height: 38px;
+
+  .multiselect__tags {
+    padding: 6px 40px 0 8px;
+  }
+
+  span.multiselect__tag{
+    background: $primary !important;
+
+    i.multiselect__tag-icon{
+      &:hover { background: #1d5a83; }
+      &:after{
+        color: $white !important;
+      }
+    }
+  }
+
+  span.multiselect__option{
+    $selectedOptionColor: #EFF4F6;
+    background: $white !important;
+
+    &::after{
+      background: $white !important;
+      color: $primary !important;
+    }
+    
+    
+    &.multiselect__option--highlight{
+      background: $selectedOptionColor !important;
+      color: $primary!important;
+
+      &::after{
+        background: $selectedOptionColor !important;
+        color: $primary !important;
+      }
+    }
+
+    &.multiselect__option--selected{
+      background: $selectedOptionColor !important;
+      color: $primary!important;
+
+      &::after{
+        background: $selectedOptionColor !important;
+        color: $primary!important;
+      }
+
+      &.multiselect__option--highlight{
+        background: $selectedOptionColor !important;
+        color: $primary!important;
+  
+        &::after{
+          background: $selectedOptionColor !important;
+          color: $primary !important;
+        }
+      }
+    }
+  }
+}
+

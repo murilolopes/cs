@@ -1,0 +1,67 @@
+/*================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.bg-transparent {
+  background-color: transparent !important;
+  border: none;
+  box-shadow: none;
+}
+.cc-bg-light {
+  background-color: #F8FAFC !important;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.swal2-actions {
+  .swal2-cancel {
+    margin-right: 2rem!important;
+  }
+}
+
+.w-fit {
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.vl {
+  border: 1px solid #DAE1E8;
+  min-height: 50px;
+}
+
+.text-decoration-underline {
+  text-decoration: underline;
+}
+
+.cc-list-item-padding {
+  padding: 0.5rem 1.25rem;
+  min-height: 50px;
+}
+
+.text-gray {
+  color: #66788B!important;
+}
+
+.card-actions-border {
+  border: 1px solid #CCD6DE;
+  border-radius: 6px;
+
+  .border-line {
+    border-bottom: 1px solid #CCD6DE;
+  }
+
+  .card-header {
+    padding: 0.5rem 1.5rem;
+  }
+
+  .card-header, .card-body {
+    background: #F8FAFC;
+  }
+}
+
+.text-black {
+  color: #242A32;
+}
