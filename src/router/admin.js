@@ -34,20 +34,4 @@ export default [
       },
     },
   },
-  {
-    path: '/asd',
-    name: 'asd',
-    component: () => import('@/views/public/Index.vue'),
-    meta: {
-      layout: 'public',
-    },
-  },
-  {
-    path: '/emissoes',
-    name: 'emissoes',
-    component: () => import('@/views/public/Emissoes.vue'),
-    meta: {
-      layout: 'public',
-    },
-  },
 ]

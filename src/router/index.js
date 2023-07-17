@@ -1,11 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import store from '@/store'
 
 // Routes
 import { canNavigate } from '@/libs/acl/routeProtection'
 import { isUserLoggedIn, getUserData, getHomeRouteForLoggedInUser } from '@/auth/utils'
 import admin from './admin'
+import publicComponents from './public'
 
 Vue.use(VueRouter)
 
@@ -21,16 +21,6 @@ const router = new VueRouter({
       path: '/login',
       name: 'auth-login',
       component: () => import('@/views/common/auth/pages/Login.vue'),
-      meta: {
-        layout: 'auth',
-        resource: 'Auth',
-        redirectIfLoggedIn: true,
-      },
-    },
-    {
-      path: '/cadastrar',
-      name: 'cadastrar',
-      component: () => import('@/views/common/auth/pages/Register.vue'),
       meta: {
         layout: 'auth',
         resource: 'Auth',
@@ -58,6 +48,7 @@ const router = new VueRouter({
       },
     },
     ...admin,
+    ...publicComponents,
   ],
 })
 
