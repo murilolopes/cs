@@ -10,9 +10,7 @@ import verticalMenu from './vertical-menu'
 import firstAccess from './first-access'
 import dashboard from './dashboard'
 import admin from './admin'
-import cedente from './cedente'
 import common from './common'
-import credenciadora from './credenciadora'
 
 Vue.use(Vuex)
 
@@ -25,9 +23,7 @@ export default new Vuex.Store({
     firstAccess,
     dashboard,
     admin,
-    cedente,
     common,
-    credenciadora,
   },
   strict: process.env.DEV,
   plugins: [createPersistedState()],

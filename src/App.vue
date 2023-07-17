@@ -15,6 +15,7 @@ const LayoutFirstAccess = () => import('@/layouts/first-access/LayoutFirstAccess
 const LayoutVertical = () => import('@/layouts/vertical/LayoutVertical.vue')
 const LayoutAuth = () => import('@/layouts/auth/LayoutAuth.vue')
 const LayoutFull = () => import('@/layouts/full/LayoutFull.vue')
+const LayoutPublic = () => import('@/layouts/public/LayoutPublic.vue')
 
 export default {
   components: {
@@ -22,32 +23,22 @@ export default {
     LayoutVertical,
     LayoutFull,
     LayoutAuth,
+    LayoutPublic,
   },
   computed: {
     layout() {
       if (this.$route.meta.layout === 'first-access') return 'layout-first-access'
       if (this.$route.meta.layout === 'auth') return 'layout-auth'
       if (this.$route.meta.layout === 'full') return 'layout-full'
+      if (this.$route.meta.layout === 'public') return 'layout-public'
       return 'layout-vertical'
     },
   },
   beforeCreate() {
-    const colors = [
-      'primary',
-      'secondary',
-      'success',
-      'info',
-      'warning',
-      'danger',
-      'light',
-      'dark',
-    ]
+    const colors = ['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark']
 
     for (let i = 0, len = colors.length; i < len; i++) {
-      $themeColors[colors[i]] = useCssVar(
-        `--${colors[i]}`,
-        document.documentElement,
-      ).value.trim()
+      $themeColors[colors[i]] = useCssVar(`--${colors[i]}`, document.documentElement).value.trim()
     }
 
     // Set Theme Breakpoints
@@ -55,10 +46,7 @@ export default {
 
     for (let i = 0, len = breakpoints.length; i < len; i++) {
       $themeBreakpoints[breakpoints[i]] = Number(
-        useCssVar(
-          `--breakpoint-${breakpoints[i]}`,
-          document.documentElement,
-        ).value.slice(0, -2),
+        useCssVar(`--breakpoint-${breakpoints[i]}`, document.documentElement).value.slice(0, -2),
       )
     }
 
@@ -87,6 +75,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '@core/scss/vue/libs/vue-select.scss';
-  @import '@core/scss/vue/libs/vue-multiselect.scss';
+@import '@core/scss/vue/libs/vue-select.scss';
+@import '@core/scss/vue/libs/vue-multiselect.scss';
 </style>

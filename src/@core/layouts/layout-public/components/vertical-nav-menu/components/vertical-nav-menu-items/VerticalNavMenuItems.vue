@@ -31,18 +31,8 @@ export default {
   },
   computed: {
     menus() {
-      const menus = {
-        admin: [
-          {
-            title: 'Dashboard Admin',
-            icon: 'GridIcon',
-            route: 'admin-dashboard',
-            action: 'admin-read',
-            resource: 'admin-user',
-          },
-        ],
-      }
-      return menus[this.$store.state.auth.userData.user_type]
+      const userType = this.$store.state.auth.userData.user_type
+      return this.$store.state.appConfig.layout.menu.navigationItems[userType]
     },
   },
 }
