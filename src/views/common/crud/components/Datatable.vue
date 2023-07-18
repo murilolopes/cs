@@ -6,52 +6,23 @@
           <h4 v-if="$route.meta.indexObject.datatableTitle">
             {{ $route.meta.indexObject.datatableTitle }}
           </h4>
-          <div v-if="$route.meta.indexObject.showModalOnAction">
-            <div class="d-flex align-items-center">
-              <b-form-checkbox class="mr-3" @change="toggleSelectedAllRows($event)">
-                Selecionar todos
-              </b-form-checkbox>
-              <b-button
-                v-for="(action, index) in $route.meta.indexObject.actionsForSelectedItems"
-                :id="`tool-` + index"
-                :key="index"
-                class="d-flex mr-2"
-                :variant="action.variant"
-                :classes="action.classes"
-                :disabled="selectedRows.length < 1"
-                @click="emitAction(action.event)"
-              >
-                <div class="d-flex align-items-center">
-                  <feather-icon :icon="action.icon" size="18" class="mr-1" />
-                  {{ action.label }}
-                </div>
-                <b-tooltip
-                  v-if="showTooltip"
-                  variant="dark"
-                  placement="bottom"
-                  triggers="hover"
-                  :target="`tool-` + index"
-                  title="Um ou mais status conflitam com esta ação."
-                  :delay="{ hide: 50 }"
-                />
-              </b-button>
-            </div>
-          </div>
-          <slot v-else name="table-caption" />
         </b-col>
         <b-col class="d-flex flex-row justify-content-end align-items-center" sm="12" md="5" lg="5">
-          <label class="mb-0 mr-1">Mostrar</label>
-          <v-select v-model="perPage" :options="perPageOptions" :clearable="false" />
-          <label class="mb-0 mr-2 ml-1">registros</label>
-          <div v-if="canShowFiltersButton" name="table-header-filter">
-            <feather-icon
-              icon="FilterIcon"
-              size="24"
-              class="cursor-pointer"
-              @click="showFiltersButton = true"
-            />
+          <!-- <b-button class="d-flex mr-2" variant="primary"> Criar novo cadastro </b-button> -->
+          <div class="d-flex flex-row justify-content-end align-items-center">
+            <label class="mb-0 mr-1">Mostrar</label>
+            <v-select v-model="perPage" :options="perPageOptions" :clearable="false" />
+            <label class="mb-0 mr-2 ml-1">registros</label>
+            <div v-if="canShowFiltersButton" name="table-header-filter">
+              <feather-icon
+                icon="FilterIcon"
+                size="24"
+                class="cursor-pointer"
+                @click="showFiltersButton = true"
+              />
+            </div>
+            <slot name="table-header-actions" />
           </div>
-          <slot name="table-header-actions" />
         </b-col>
       </b-row>
     </div>
@@ -72,9 +43,7 @@
       :filter-included-fields="filterOn"
       :tbody-tr-class="rowClass"
       @filtered="onFiltered"
-      @row-selected="onRowSelected"
       @head-clicked="onHeadClicked"
-      @changeSelectedRows="changeSelectedRows"
     >
       <template #cell(actions)="data">
         <div v-if="$route.meta.indexObject.showModalOnAction">
@@ -106,50 +75,11 @@
         </router-link>
       </template>
 
-      <template #cell(viewButton)="data">
-        <b-button
-          variant="primary"
-          size="sm"
-          @click="
-            $router.push({
-              name: 'admin-economicGroup.general-data',
-              params: {
-                id: data.item.grupo_economico_id,
-                idMatriz: data.item.id,
-              },
-            })
-          "
-        >
-          Analisar
-        </b-button>
-      </template>
-
-      <template v-if="hasPaymentField" #cell(payment)="data">
-        <b-button
-          v-if="checkPaymentStatus(data.item)"
-          variant="primary"
-          :to="{
-            name: $route.meta.indexObject.editRouteName,
-            params: { id: data.item.id },
-          }"
-          size="sm"
-          class="d-flex align-items-center justify-content-center text-center"
-        >
-          Pagar
-        </b-button>
-      </template>
-
       <template #cell()="data">
         <span
           class="d-flex align-items-center justify-content-center text-center text-nowrap"
           v-html="data.value"
         />
-      </template>
-
-      <template v-if="enableSelectableDatatable" #cell(select)="data">
-        <div>
-          <b-form-checkbox v-model="data.rowSelected" @change="selectRow(data, $event)" />
-        </div>
       </template>
     </b-table>
 
@@ -369,9 +299,6 @@ export default {
 
       return exportToXLS(result, this.$route.meta.pageTitle)
     },
-    emitAction(action) {
-      if (action) EventBus.$emit(action, this.selectedRows)
-    },
     changeSelectedRows(selectedRows) {
       this.selectedRows = selectedRows
     },
@@ -446,26 +373,6 @@ export default {
     refresh() {
       this.clearDatatable()
       this.getData()
-    },
-    booleanFormatter(value) {
-      if (!value) return ''
-
-      return value === true ? 'Sim' : 'Não'
-    },
-    companyStatusFormatter(value) {
-      if (!value) return ''
-
-      let variant
-
-      if (value === 'pendente') {
-        variant = 'light-warning'
-      } else if (value === 'aprovada') {
-        variant = 'light-success'
-      } else {
-        variant = 'light-danger'
-      }
-
-      return `<span class="badge badge-${variant} badge-pill text-capitalize">${value}</span>`
     },
     rowClass(item, type) {
       if (!item || type !== 'row') return

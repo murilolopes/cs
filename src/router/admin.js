@@ -7,11 +7,11 @@ export default [
       action: 'admin-read',
       resource: 'admin-user',
       pageTitle: 'Grupos econômicos',
-      datatableTitle: 'Grupos disponíveis na plataforma',
       skipGoToHome: true,
       indexObject: {
         serviceUrl: 'backoffice/cedentes',
         editRouteName: 'admin-dashboard.general-data',
+        datatableTitle: 'Grupos disponíveis na plataforma',
         fields: [
           {
             label: 'Nome do grupo econômico',
