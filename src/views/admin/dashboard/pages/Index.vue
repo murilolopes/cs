@@ -343,6 +343,10 @@ export default {
   methods: {
     newEconomicGroup() {
       console.log(1, this.economicGroup)
+      this.$router.push({
+        name: 'admin-economicGroup.companies',
+        params: { id: this.economicGroup },
+      })
     },
     excelExport() {
       const keys = this.$route.meta.indexObject.fields.map((item) => {

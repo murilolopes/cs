@@ -34,4 +34,47 @@ export default [
       },
     },
   },
+  {
+    path: '/admin/grupo-economico/:id',
+    component: () => import('@/layouts/vertical/LayoutVerticalAssignor.vue'),
+    meta: {
+      action: 'admin-read',
+      resource: 'admin-user',
+    },
+    children: [
+      {
+        path: 'empresas',
+        name: 'admin-economicGroup.companies',
+        component: () => import('@/views/admin/dashboard/pages/Companies.vue'),
+        meta: {
+          action: 'admin-read',
+          resource: 'admin-user',
+          pageTitle: 'Grupo econômico',
+          skipGoToHome: true,
+        },
+      },
+      {
+        path: 'usuarios',
+        name: 'admin-economicGroup.users',
+        component: () => import('@/views/admin/dashboard/pages/Users.vue'),
+        meta: {
+          action: 'admin-read',
+          resource: 'admin-user',
+          pageTitle: 'Grupo econômico',
+          skipGoToHome: true,
+        },
+      },
+      {
+        path: 'convites',
+        name: 'admin-economicGroup.invites',
+        component: () => import('@/views/admin/dashboard/pages/Invites.vue'),
+        meta: {
+          action: 'admin-read',
+          resource: 'admin-user',
+          pageTitle: 'Grupo econômico',
+          skipGoToHome: true,
+        },
+      },
+    ],
+  },
 ]
