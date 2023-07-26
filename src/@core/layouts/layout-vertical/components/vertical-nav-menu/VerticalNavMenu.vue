@@ -3,9 +3,7 @@
     class="main-menu menu-fixed menu-accordion menu-shadow"
     :class="[
       {
-        expanded:
-          !isVerticalMenuCollapsed ||
-          (isVerticalMenuCollapsed && isMouseHovered),
+        expanded: !isVerticalMenuCollapsed || (isVerticalMenuCollapsed && isMouseHovered),
       },
       skin === 'semi-dark' ? 'menu-dark' : 'menu-light',
     ]"
@@ -23,12 +21,17 @@
         <ul class="nav navbar-nav flex-row">
           <!-- Logo & Text -->
           <li class="nav-item mr-auto">
-            <b-link
-              class="navbar-brand"
-              :to="brandLink()"
-            >
-              <span class="brand-logo"> <b-img :src="appLogoImage" alt="logo" /> </span>
-              <h2 class="brand-text"> {{ appName }} </h2>
+            <b-link class="navbar-brand" :to="brandLink()">
+              <span
+                class="brand-typography"
+                v-if="!isVerticalMenuCollapsed || (isVerticalMenuCollapsed && isMouseHovered)"
+              >
+                <b-img width="160px" :src="appLogoImage" alt="logotipo" />
+              </span>
+              <span class="brand-logo" v-else>
+                <b-img :src="logo" alt="logomarca" />
+              </span>
+              <h2 class="brand-text">{{ appName }}</h2>
             </b-link>
           </li>
 
@@ -55,10 +58,7 @@
     <!-- / main menu header-->
 
     <!-- Shadow -->
-    <div
-      :class="{ 'd-block': shallShadowBottom }"
-      class="shadow-bottom"
-    />
+    <div :class="{ 'd-block': shallShadowBottom }" class="shadow-bottom" />
 
     <!-- main menu content-->
     <vue-perfect-scrollbar
@@ -66,7 +66,7 @@
       class="main-menu-content scroll-area"
       tagname="ul"
       @ps-scroll-y="
-        evt => {
+        (evt) => {
           shallShadowBottom = evt.srcElement.scrollTop > 0
         }
       "
@@ -112,6 +112,7 @@ export default {
       updateMouseHovered,
     } = useVerticalNavMenu(props)
 
+    const logo = require('@/assets/images/cs-icon.svg')
     const { skin } = useAppConfig()
 
     // Shadow bottom is UI specific and can be removed by user => It's not in `useVerticalNavMenu`
@@ -124,7 +125,9 @@ export default {
       wheelPropagation: false,
     }
 
-    const collapseTogglerIconFeather = computed(() => (collapseTogglerIcon.value === 'unpinned' ? 'SidebarIcon' : 'XIcon'))
+    const collapseTogglerIconFeather = computed(() =>
+      collapseTogglerIcon.value === 'unpinned' ? 'SidebarIcon' : 'XIcon',
+    )
 
     // App Name
     const { appName, appLogoImage } = $themeConfig.app
@@ -147,6 +150,7 @@ export default {
       // App Name
       appName,
       appLogoImage,
+      logo,
     }
   },
   methods: {
@@ -154,7 +158,7 @@ export default {
       const userType = this.$store.state.auth.userData.user_type
       return { name: userType === 'admin' ? 'admin-dashboard' : 'dashboard' }
     },
-  }
+  },
 }
 </script>
 

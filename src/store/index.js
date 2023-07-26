@@ -10,6 +10,7 @@ import verticalMenu from './vertical-menu'
 import firstAccess from './first-access'
 import dashboard from './dashboard'
 import admin from './admin'
+import investor from './investor'
 import common from './common'
 
 Vue.use(Vuex)
@@ -23,6 +24,7 @@ export default new Vuex.Store({
     firstAccess,
     dashboard,
     admin,
+    investor,
     common,
   },
   strict: process.env.DEV,

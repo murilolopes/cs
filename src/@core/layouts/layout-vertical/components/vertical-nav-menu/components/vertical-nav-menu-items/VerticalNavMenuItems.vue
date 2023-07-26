@@ -41,6 +41,29 @@ export default {
             resource: 'admin-user',
           },
         ],
+        investidor: [
+          {
+            title: 'Emissões',
+            icon: 'DollarSignIcon',
+            route: 'investor.emissions',
+            action: 'admin-read',
+            resource: 'admin-user',
+          },
+          {
+            title: 'Calculadora',
+            icon: 'GridIcon',
+            route: 'admin-dashboard',
+            action: 'admin-read',
+            resource: 'admin-user',
+          },
+          {
+            title: 'Minha conta',
+            icon: 'UserIcon',
+            route: 'admin-dashboard',
+            action: 'admin-read',
+            resource: 'admin-user',
+          },
+        ],
       }
       return menus[this.$store.state.auth.userData.user_type]
     },

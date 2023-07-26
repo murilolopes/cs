@@ -4,9 +4,9 @@ export const $themeBreakpoints = {}
 
 export const $themeConfig = {
   app: {
-    appName: 'Antecipa Cartão', // Will update name in navigation menu (Branding)
+    // appName: 'Credit Sec',
     // eslint-disable-next-line global-require
-    appLogoImage: require('@/assets/images/logo/logo-ac.svg'), // Will update logo in navigation menu (Branding)
+    appLogoImage: require('@/assets/images/credit-sec-logo.svg'),
   },
   layout: {
     isRTL: false,

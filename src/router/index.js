@@ -5,6 +5,7 @@ import VueRouter from 'vue-router'
 import { canNavigate } from '@/libs/acl/routeProtection'
 import { isUserLoggedIn, getUserData, getHomeRouteForLoggedInUser } from '@/auth/utils'
 import admin from './admin'
+import investor from './investor'
 import publicComponents from './public'
 
 Vue.use(VueRouter)
@@ -48,6 +49,7 @@ const router = new VueRouter({
       },
     },
     ...admin,
+    ...investor,
     ...publicComponents,
   ],
 })
@@ -55,7 +57,7 @@ const router = new VueRouter({
 router.beforeEach((to, _, next) => {
   const isLoggedIn = isUserLoggedIn()
 
-  if (!canNavigate(to)) {
+  if (canNavigate(to)) {
     // Redirect to log in if not logged in
     if (!isLoggedIn) return next({ name: 'auth-login' })
 
