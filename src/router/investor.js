@@ -92,6 +92,9 @@ export default [
     meta: {
       action: 'investor-read',
       resource: 'investor-user',
+      pageTitle: 'Detalhamento da emissão',
+      pageSubtitle: 'Análise detalhada da emissão.',
+      skipGoToHome: true,
     },
   },
   {

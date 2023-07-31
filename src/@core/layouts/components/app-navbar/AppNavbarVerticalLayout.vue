@@ -3,22 +3,21 @@
     <!-- Nav Menu Toggler -->
     <ul class="nav navbar-nav d-xl-none">
       <li class="nav-item">
-        <b-link
-          class="nav-link"
-          @click="toggleVerticalMenuActive"
-        >
-          <feather-icon
-            icon="MenuIcon"
-            size="21"
-          />
+        <b-link class="nav-link" @click="toggleVerticalMenuActive">
+          <feather-icon icon="MenuIcon" size="21" />
         </b-link>
       </li>
     </ul>
 
     <!-- Left Col -->
-    <div
-      class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex"
-    >
+    <div class="bookmark-wrapper align-items-center flex-grow-1 d-none d-lg-flex">
+      <div class="d-flex justify-content-center align-items-center">
+        <span>
+          Portal do
+          <h4>Investidor</h4>
+        </span>
+        <b-img src="@/assets/images/portal-investidor-icon.svg" class="ml-1" />
+      </div>
       <!-- Bookmarks Container -->
       <!-- <bookmarks /> -->
     </div>
@@ -38,7 +37,7 @@
 </template>
 
 <script>
-import { BLink, BNavbarNav } from 'bootstrap-vue'
+import { BImg, BLink, BNavbarNav } from 'bootstrap-vue'
 import Bookmarks from './components/Bookmarks.vue'
 import Locale from './components/Locale.vue'
 import SearchBar from './components/SearchBar.vue'
@@ -52,6 +51,7 @@ import NavBarDivisor from './components/NavBarDivisor'
 
 export default {
   components: {
+    BImg,
     BLink,
     LogoutButton,
     UserData,

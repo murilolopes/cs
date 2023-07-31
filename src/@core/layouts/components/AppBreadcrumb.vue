@@ -1,8 +1,5 @@
 <template>
-  <b-row
-    v-if="$route.meta.breadcrumb || $route.meta.pageTitle"
-    class="content-header px-2"
-  >
+  <b-row v-if="$route.meta.breadcrumb || $route.meta.pageTitle" class="content-header px-2">
     <!-- Content Left -->
     <b-col class="content-header-left mb-2" cols="12" md="9">
       <b-row class="breadcrumbs-top">
@@ -16,11 +13,7 @@
           <div class="breadcrumb-wrapper" v-if="!$route.meta.skipGoToHome">
             <b-breadcrumb>
               <b-breadcrumb-item to="/">
-                <feather-icon
-                  icon="HomeIcon"
-                  size="16"
-                  class="align-text-top"
-                />
+                <feather-icon icon="HomeIcon" size="16" class="align-text-top" />
               </b-breadcrumb-item>
               <b-breadcrumb-item
                 v-for="item in $route.meta.breadcrumb"
@@ -33,11 +26,7 @@
             </b-breadcrumb>
           </div>
         </b-col>
-        <b-col
-          cols="12"
-          class="d-flex align-items-center"
-          v-if="$route.meta.pageSubtitle"
-        >
+        <b-col cols="12" class="d-flex align-items-center" v-if="$route.meta.pageSubtitle">
           <h4 class="float-left pr-1 mt-1 mb-0">
             {{ $route.meta.pageSubtitle }}
           </h4>
@@ -62,33 +51,51 @@
         <span class="align-middle">{{ action.title }}</span>
       </b-button>
     </b-col>
+
+    <!-- Content Right -->
+    <b-col v-else class="d-flex justify-content-end align-items-center" md="3" cols="12">
+      <div
+        class="d-flex justify-content-end align-items-center cursor-pointer"
+        @click="goToWhatsApp"
+      >
+        <span>Fale pelo<br />WhatsApp</span>
+        <b-img src="@/assets/images/whats-app.svg" class="ml-1" />
+      </div>
+    </b-col>
   </b-row>
 </template>
 
 <script>
 import {
-  BBreadcrumb,
-  BBreadcrumbItem,
+  BImg,
   BRow,
   BCol,
+  BButton,
   BDropdown,
   BDropdownItem,
-  BButton,
-} from "bootstrap-vue";
-import Ripple from "vue-ripple-directive";
+  BBreadcrumb,
+  BBreadcrumbItem,
+} from 'bootstrap-vue'
+import Ripple from 'vue-ripple-directive'
 
 export default {
   directives: {
     Ripple,
   },
   components: {
-    BBreadcrumb,
-    BBreadcrumbItem,
+    BImg,
     BRow,
     BCol,
+    BButton,
     BDropdown,
     BDropdownItem,
-    BButton,
+    BBreadcrumb,
+    BBreadcrumbItem,
   },
-};
+  methods: {
+    goToWhatsApp() {
+      window.open('https://api.whatsapp.com/send?phone=5511999999999', '_blank')
+    },
+  },
+}
 </script>
