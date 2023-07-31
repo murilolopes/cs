@@ -37,7 +37,7 @@ export default [
               },
               {
                 label: 'Tempo vencimento (anos)',
-                key: 'slider',
+                key: 'teste',
                 type: 'slider',
               },
               {

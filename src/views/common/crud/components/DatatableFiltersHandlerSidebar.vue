@@ -13,13 +13,14 @@
     >
       <template #default="{ hide }">
         <!-- Header -->
-        <div class="d-flex justify-content-between align-items-center content-sidebar-header px-2 py-1">
-          <h5 class="mb-0"> Filtros avançados </h5>
+        <div
+          class="d-flex justify-content-between align-items-center content-sidebar-header px-2 py-1"
+        >
+          <h5 class="mb-0">Filtros avançados</h5>
           <feather-icon class="ml-1 cursor-pointer" icon="XIcon" size="16" @click="hide" />
         </div>
 
         <filters @updateFilterValues="updateFilterValues" />
-
       </template>
     </b-sidebar>
   </div>
@@ -44,11 +45,11 @@ export default {
   data() {
     return {}
   },
-  methods:{
+  methods: {
     updateFilterValues(values) {
       this.$emit('updateFilterValues', values)
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -59,7 +60,7 @@ export default {
 
 #sidebar-task-handler {
   .content-sidebar-header {
-    background-color: #EFF4F6;
+    background-color: #eff4f6;
   }
 }
 </style>

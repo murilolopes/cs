@@ -24,11 +24,18 @@
               v-model="filterValues[field.key]"
               class="form-control placeholder-dark"
               :placeholder="field.label"
-            ></b-form-input>
+            />
 
             <div v-else-if="field.type === 'slider'">
               <h6>{{ field.label }}</h6>
-              <vue-slider v-model="filterValues[field.key]" />
+              <vue-slider
+                v-model="filterValues[field.key]"
+                :min="0"
+                :max="50"
+                :interval="1"
+                class="mt-2 mb-1 cc-slider"
+                :lazy="true"
+              />
             </div>
 
             <flat-pickr
@@ -59,6 +66,7 @@ import Filters from '../components/Filters.vue'
 import flatPickr from 'vue-flatpickr-component'
 import vSelect from 'vue-select'
 import VueSlider from 'vue-slider-component'
+import 'vue-slider-component/theme/antd.css'
 
 export default {
   name: 'Filters',
@@ -128,9 +136,11 @@ export default {
 
         Object.entries(this.filterValues).filter((obj) => {
           let key = obj[0]
-          let value = typeof obj[1] === 'string' ? obj[1] : obj[1]?.value || ''
+          let value =
+            typeof obj[1] === 'string' || typeof obj[1] === 'number' ? obj[1] : obj[1]?.value || ''
 
-          if (value.match(/[0-9] to [0-9]/g)) value = value.split(' to ')
+          if (typeof value === 'string' && value.match(/[0-9] to [0-9]/g))
+            value = value.split(' to ')
           if (value) filters[key] = value
         })
 
@@ -148,5 +158,9 @@ export default {
     color: #66788b;
     opacity: 1;
   }
+}
+
+.cc-slider {
+  height: 8px !important;
 }
 </style>
