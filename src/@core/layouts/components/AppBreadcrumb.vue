@@ -53,7 +53,12 @@
     </b-col>
 
     <!-- Content Right -->
-    <b-col v-else class="d-flex justify-content-end align-items-center" md="3" cols="12">
+    <b-col
+      v-else
+      class="content-header-right text-md-right d-md-block d-none mb-1"
+      md="3"
+      cols="12"
+    >
       <div
         class="d-flex justify-content-end align-items-center cursor-pointer"
         @click="goToWhatsApp"
