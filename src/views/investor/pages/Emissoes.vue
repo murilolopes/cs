@@ -73,9 +73,19 @@
         lg="4"
         xl="4"
       >
-        <label class="mb-0 mr-1">Mostrar</label>
-        <v-select v-model="perPage" :options="perPageOptions" :clearable="false" />
-        <label class="mr-2 ml-1">registros</label>
+        <div class="d-flex align-items-center mr-2">
+          <feather-icon
+            icon="FilterIcon"
+            size="22"
+            class="text-secondary cursor-pointer"
+            @click="showFiltersButton = true"
+          />
+        </div>
+        <div class="d-flex align-items-center">
+          <label class="mb-0 mr-1">Mostrar</label>
+          <v-select v-model="perPage" :options="perPageOptions" :clearable="false" />
+          <label class="mr-2 ml-1">registros</label>
+        </div>
       </b-col>
     </b-row>
     <b-row>
@@ -116,6 +126,12 @@
         </b-pagination>
       </b-col>
     </b-row>
+
+    <datatable-filters-handler-sidebar
+      :is-task-handler-sidebar-active="showFiltersButton"
+      @closeSideBar="showFiltersButton = false"
+      @updateFilterValues="updateFilterValues"
+    />
   </b-card>
 </template>
 
@@ -123,6 +139,8 @@
 import { moneyFormat } from '@/@core/comp-functions/data_visualization/datatable'
 import { formatDate } from '@core/utils/filter'
 import EmissionCard from '@/views/investor/components/EmissionCard.vue'
+import DatatableFiltersHandlerSidebar from '@/views/common/crud/components/DatatableFiltersHandlerSidebar.vue'
+
 import {
   BRow,
   BCol,
@@ -148,15 +166,16 @@ export default {
     BImg,
     BCard,
     BBadge,
-    BInputGroup,
     BButton,
-    BButtonGroup,
-    BInputGroupPrepend,
-    BInputGroupAppend,
     vSelect,
     BFormInput,
+    BInputGroup,
     BPagination,
+    BButtonGroup,
     EmissionCard,
+    BInputGroupAppend,
+    BInputGroupPrepend,
+    DatatableFiltersHandlerSidebar,
   },
   directives: { mask },
   filters: {
@@ -165,6 +184,8 @@ export default {
   },
   data() {
     return {
+      datatableFilterValues: {},
+      showFiltersButton: false,
       items: [],
       currentPage: 1,
       search: {
@@ -236,6 +257,9 @@ export default {
     selectButton(type) {
       this.selectedButton = type
     },
+    updateFilterValues(values) {
+      this.datatableFilterValues = values
+    },
   },
   computed: {
     monthMask() {
@@ -252,6 +276,10 @@ export default {
       if (this.selectedButton !== 'all') payload.tipo_emissao = this.selectedButton.toUpperCase()
       if (this.searchQuery.key && this.searchQuery.value)
         payload[this.searchQuery.key] = this.searchQuery.value
+
+      if (Object.keys(this.datatableFilterValues).length) {
+        payload = { ...payload, ...this.datatableFilterValues }
+      }
 
       return payload
     },

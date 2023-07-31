@@ -1,6 +1,11 @@
 <template>
   <div v-if="renderComponent">
-    <b-card class="mb-0" :title="category.category" v-for="(category, index) in filters" :key="index">
+    <b-card
+      class="mb-0"
+      :title="category.category"
+      v-for="(category, index) in filters"
+      :key="index"
+    >
       <b-row v-for="(field, idx) in category.fields" :key="idx">
         <b-col cols="12">
           <b-form-group class="mb-2">
@@ -20,6 +25,11 @@
               class="form-control placeholder-dark"
               :placeholder="field.label"
             ></b-form-input>
+
+            <div v-else-if="field.type === 'slider'">
+              <h6>{{ field.label }}</h6>
+              <vue-slider v-model="filterValues[field.key]" />
+            </div>
 
             <flat-pickr
               v-else
@@ -44,10 +54,11 @@
 </template>
 
 <script>
-import { BCard, BButton, BFormGroup, BFormInput, BRow, BCol } from 'bootstrap-vue';
-import Filters from '../components/Filters.vue';
-import flatPickr from 'vue-flatpickr-component';
-import vSelect from 'vue-select';
+import { BCard, BButton, BFormGroup, BFormInput, BRow, BCol } from 'bootstrap-vue'
+import Filters from '../components/Filters.vue'
+import flatPickr from 'vue-flatpickr-component'
+import vSelect from 'vue-select'
+import VueSlider from 'vue-slider-component'
 
 export default {
   name: 'Filters',
@@ -55,73 +66,80 @@ export default {
     BRow,
     BCol,
     BCard,
-    BFormGroup,
-    BFormInput,
     BButton,
     Filters,
     vSelect,
     flatPickr,
+    VueSlider,
+    BFormGroup,
+    BFormInput,
   },
   data() {
     return {
       renderComponent: true,
       filterValues: {},
       statusOptions: [],
-    };
+    }
   },
   async mounted() {
-    if (!this.$route.meta.indexObject?.filters?.length || this.$route.meta.indexObject?.filters?.length < 2) return;
+    if (
+      !this.$route.meta.indexObject?.filters?.length ||
+      this.$route.meta.indexObject?.filters?.length < 2
+    )
+      return
     // !TODO: refatorar essa parte onde pega o index 1 para pegar de acordo com o filtro que tenha campo que precisa de request.
-    this.statusOptions = this.$route.meta.indexObject?.filters[1].fields.filter(async (field, index) => {
-      if (!!field.action) {
-        try {
-          const { data } = await this.$store.dispatch(field.action, {
-            model: field.model,
-            model_label: field.modelLabel,
-            model_value: field.modelValue,
-          });
-          this.$nextTick(() => (field.options = data));
-        } catch (error) {
-          this.$nextTick(() => (field.options = []));
+    this.statusOptions = this.$route.meta.indexObject?.filters[1].fields.filter(
+      async (field, index) => {
+        if (!!field.action) {
+          try {
+            const { data } = await this.$store.dispatch(field.action, {
+              model: field.model,
+              model_label: field.modelLabel,
+              model_value: field.modelValue,
+            })
+            this.$nextTick(() => (field.options = data))
+          } catch (error) {
+            this.$nextTick(() => (field.options = []))
+          }
         }
-      }
-    });
-    this.forceRerender();
+      },
+    )
+    this.forceRerender()
   },
   computed: {
     filters() {
-      return this.$route.meta.indexObject?.filters;
+      return this.$route.meta.indexObject?.filters
     },
   },
   methods: {
     clearFilters() {
-      this.filterValues = {};
+      this.filterValues = {}
     },
     async forceRerender() {
-      this.renderComponent = false;
-      await this.$nextTick();
-      this.renderComponent = true;
+      this.renderComponent = false
+      await this.$nextTick()
+      this.renderComponent = true
     },
   },
   watch: {
     filterValues: {
       handler() {
-        let filters = {};
+        let filters = {}
 
         Object.entries(this.filterValues).filter((obj) => {
-          let key = obj[0];
-          let value = typeof obj[1] === 'string' ? obj[1] : obj[1]?.value || '';
+          let key = obj[0]
+          let value = typeof obj[1] === 'string' ? obj[1] : obj[1]?.value || ''
 
-          if (value.match(/[0-9] to [0-9]/g)) value = value.split(' to ');
-          if (value) filters[key] = value;
-        });
+          if (value.match(/[0-9] to [0-9]/g)) value = value.split(' to ')
+          if (value) filters[key] = value
+        })
 
-        this.$emit('updateFilterValues', filters);
+        this.$emit('updateFilterValues', filters)
       },
       deep: true,
     },
   },
-};
+}
 </script>
 <style lang="scss">
 @import '@core/scss/vue/libs/vue-flatpicker.scss';
