@@ -1,5 +1,15 @@
 export default [
   {
+    path: '/investidor/login',
+    name: 'investor-auth-login',
+    component: () => import('@/views/common/auth/pages/Login.vue'),
+    meta: {
+      layout: 'auth',
+      resource: 'Auth',
+      redirectIfLoggedIn: false,
+    },
+  },
+  {
     path: '/investidor/emissoes',
     name: 'investor.emissions',
     component: () => import('@/views/investor/pages/Emissoes.vue'),

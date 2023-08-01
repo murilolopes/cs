@@ -16,9 +16,9 @@
           </div>
 
           <div>
-            <b-button variant="outline-primary bg-white text-dark" @click="$emit('cancel')"
-              >Cancelar</b-button
-            >
+            <b-button variant="outline-primary bg-white text-dark" @click="$emit('cancel')">
+              Cancelar
+            </b-button>
             <b-button variant="primary bg-white text-dark ml-2">Editar</b-button>
           </div>
         </div>
@@ -59,21 +59,13 @@
             </b-col>
             <b-col cols="3">
               <b-form-group label="CPF" label-for="cpf">
-                <validation-provider
-                  #default="{ errors }"
+                <b-form-input
+                  id="cpf"
+                  v-model="user.cpf"
+                  v-mask="'###.###.###-##'"
+                  disabled
                   name="cpf"
-                  vid="cpf"
-                  rules="required|cpf"
-                >
-                  <b-form-input
-                    id="cpf"
-                    v-model="user.cpf"
-                    v-mask="'#.##'"
-                    :state="errors.length > 0 ? false : null"
-                    name="cpf"
-                  />
-                  <small class="text-danger">{{ errors[0] }}</small>
-                </validation-provider>
+                />
               </b-form-group>
             </b-col>
             <b-col cols="3">
@@ -95,10 +87,103 @@
                 </validation-provider>
               </b-form-group>
             </b-col>
+            <b-col cols="3">
+              <b-form-group>
+                <label for="basic-password">Password</label>
+                <b-input-group>
+                  <b-form-input id="basic-password" placeholder="********" disabled />
+                  <b-input-group-append is-text id="passwordIcon">
+                    <feather-icon
+                      icon="EditIcon"
+                      class="cursor-pointer text-warning"
+                      size="22"
+                      @click="$bvModal.show('modal-password')"
+                    />
+                  </b-input-group-append>
+                </b-input-group>
+              </b-form-group>
+            </b-col>
           </b-form-row>
         </b-form-group>
       </validation-observer>
     </b-form>
+
+    <b-modal id="modal-password" centered hide-footer header-bg-variant="white">
+      <div class="d-flex flex-column justify-content-center align-items-start">
+        <h4 class="mb-2">Alterar senha da conta</h4>
+
+        <validation-observer ref="resetForm" #default="{ invalid }" class="w-100">
+          <b-form-group label="Senha atual" label-for="password" class="d-flex flex-column mb-2">
+            <validation-provider
+              #default="{ errors }"
+              name="Senha"
+              vid="password"
+              rules="required|password"
+            >
+              <b-form-input
+                id="password"
+                v-model="newPassword.password"
+                :state="errors.length > 0 ? false : null"
+                name="password"
+                class="w-100"
+              />
+              <small class="text-danger">{{ errors[0] }}</small>
+            </validation-provider>
+          </b-form-group>
+          <b-form-group label="Nova senha" label-for="password" class="d-flex flex-column mb-2">
+            <validation-provider
+              #default="{ errors }"
+              name="Senha"
+              vid="password"
+              rules="required|password"
+            >
+              <b-form-input
+                id="password"
+                v-model="newPassword.newPassword"
+                :state="errors.length > 0 ? false : null"
+                name="password"
+                class="w-100"
+              />
+              <small class="text-danger">{{ errors[0] }}</small>
+            </validation-provider>
+          </b-form-group>
+          <b-form-group
+            label="Confirme a nova senha"
+            label-for="password"
+            class="d-flex flex-column mb-2"
+          >
+            <validation-provider
+              #default="{ errors }"
+              name="Senha"
+              vid="password"
+              rules="required|password"
+            >
+              <b-form-input
+                id="password"
+                v-model="newPassword.newPasswordConfirmation"
+                :state="errors.length > 0 ? false : null"
+                name="password"
+                class="w-100"
+              />
+              <small class="text-danger">{{ errors[0] }}</small>
+            </validation-provider>
+          </b-form-group>
+
+          <div class="d-flex flex-row justify-content-around mt-1">
+            <b-button
+              variant="outline-primary"
+              class="mb-1 mr-1"
+              @click="$bvModal.hide('modalResendInvite')"
+            >
+              Cancelar
+            </b-button>
+            <b-button variant="primary" class="mb-1" @click="" :disabled="invalid">
+              Continuar
+            </b-button>
+          </div>
+        </validation-observer>
+      </div>
+    </b-modal>
   </b-card>
 </template>
 
@@ -114,6 +199,10 @@ import {
   BButton,
   BFormInput,
   BImg,
+  BInputGroup,
+  BInputGroupPrepend,
+  BInputGroupAppend,
+  BFormTextarea,
 } from 'bootstrap-vue'
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
 import { required, cpf } from '@validations'
@@ -130,6 +219,10 @@ export default {
     BButton,
     BFormRow,
     BFormGroup,
+    BInputGroup,
+    BInputGroupPrepend,
+    BInputGroupAppend,
+    BFormTextarea,
     BFormInput,
     BFormCheckbox,
     ValidationProvider,
@@ -139,11 +232,15 @@ export default {
   props: {
     profile: {
       type: Object,
-      required: true,
+      required: false,
     },
   },
   data() {
     return {
+      newPassword: {
+        password: '',
+        newPassword: '',
+      },
       user: {
         name: '',
         phone: '',
@@ -153,10 +250,16 @@ export default {
     }
   },
   mounted() {
-    this.user = this.profile
+    // this.user = this.profile
   },
   methods: {},
 }
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+#passwordIcon {
+  .input-group-text {
+    background-color: #efefef !important;
+  }
+}
+</style>
