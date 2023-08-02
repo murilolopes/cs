@@ -3,9 +3,7 @@
     class="main-menu menu-fixed menu-accordion menu-shadow"
     :class="[
       {
-        expanded:
-          !isVerticalMenuCollapsed ||
-          (isVerticalMenuCollapsed && isMouseHovered),
+        expanded: !isVerticalMenuCollapsed || (isVerticalMenuCollapsed && isMouseHovered),
       },
       skin === 'semi-dark' ? 'menu-dark' : 'menu-light',
     ]"
@@ -23,12 +21,9 @@
         <ul class="nav navbar-nav flex-row">
           <!-- Logo & Text -->
           <li class="nav-item mr-auto">
-            <b-link
-              class="navbar-brand"
-              :to="brandLink()"
-            >
+            <b-link class="navbar-brand" :to="brandLink()">
               <span class="brand-logo"> <b-img :src="appLogoImage" alt="logo" /> </span>
-              <h2 class="brand-text"> {{ appName }} </h2>
+              <h2 class="brand-text">{{ appName }}</h2>
             </b-link>
           </li>
 
@@ -55,10 +50,7 @@
     <!-- / main menu header-->
 
     <!-- Shadow -->
-    <div
-      :class="{ 'd-block': shallShadowBottom }"
-      class="shadow-bottom"
-    />
+    <div :class="{ 'd-block': shallShadowBottom }" class="shadow-bottom" />
 
     <!-- main menu content-->
     <vue-perfect-scrollbar
@@ -66,7 +58,7 @@
       class="main-menu-content scroll-area"
       tagname="ul"
       @ps-scroll-y="
-        evt => {
+        (evt) => {
           shallShadowBottom = evt.srcElement.scrollTop > 0
         }
       "
@@ -124,7 +116,9 @@ export default {
       wheelPropagation: false,
     }
 
-    const collapseTogglerIconFeather = computed(() => (collapseTogglerIcon.value === 'unpinned' ? 'SidebarIcon' : 'XIcon'))
+    const collapseTogglerIconFeather = computed(() =>
+      collapseTogglerIcon.value === 'unpinned' ? 'SidebarIcon' : 'XIcon',
+    )
 
     // App Name
     const { appName, appLogoImage } = $themeConfig.app
@@ -151,10 +145,14 @@ export default {
   },
   methods: {
     brandLink() {
-      const userType = this.$store.state.auth.userData.user_type
-      return { name: userType === 'admin' ? 'admin-dashboard' : 'dashboard' }
+      const dashboardRouteByUserType = {
+        'Admin::User': 'admin.dashboard',
+        'Investidor::User': 'investor.dashboard',
+      }
+
+      return { name: dashboardRouteByUserType[this.$store.state.auth.userData.type] }
     },
-  }
+  },
 }
 </script>
 

@@ -12,7 +12,7 @@
                   <div class="my-drive" />
                   <b-link
                     class="list-group-item list-group-item-action d-flex justify-content-start align-items-center"
-                    :to="{ name: 'admin-economicGroup.companies' }"
+                    :to="{ name: 'admin.economicGroup.companies' }"
                     exact-active-class="active"
                   >
                     <feather-icon icon="DollarSignIcon" size="16" class="mr-1" />
@@ -20,7 +20,7 @@
                   </b-link>
                   <b-link
                     class="list-group-item list-group-item-action d-flex justify-content-start align-items-center"
-                    :to="{ name: 'admin-economicGroup.users' }"
+                    :to="{ name: 'admin.economicGroup.users' }"
                     exact-active-class="active"
                   >
                     <feather-icon icon="UsersIcon" size="16" class="mr-1" />
@@ -28,7 +28,7 @@
                   </b-link>
                   <b-link
                     class="list-group-item list-group-item-action d-flex justify-content-start align-items-center"
-                    :to="{ name: 'admin-economicGroup.invites' }"
+                    :to="{ name: 'admin.economicGroup.invites' }"
                     exact-active-class="active"
                   >
                     <feather-icon icon="UserCheckIcon" size="16" class="mr-1" />

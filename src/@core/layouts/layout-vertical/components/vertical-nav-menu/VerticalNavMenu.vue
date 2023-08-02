@@ -155,8 +155,12 @@ export default {
   },
   methods: {
     brandLink() {
-      const userType = this.$store.state.auth.userData.user_type
-      return { name: userType === 'admin' ? 'admin-dashboard' : 'dashboard' }
+      const dashboardRouteByUserType = {
+        'Admin::User': 'admin.dashboard',
+        'Investidor::User': 'investor.dashboard',
+      }
+
+      return { name: dashboardRouteByUserType[this.$store.state.auth.userData.type] }
     },
   },
 }

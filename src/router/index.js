@@ -17,17 +17,17 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   },
   routes: [
-    { path: '/', redirect: { name: 'dashboard' } },
-    {
-      path: '/login',
-      name: 'auth-login',
-      component: () => import('@/views/common/auth/pages/Login.vue'),
-      meta: {
-        layout: 'auth',
-        resource: 'Auth',
-        redirectIfLoggedIn: true,
-      },
-    },
+    // { path: '/', redirect: { name: 'dashboard' } },
+    // {
+    //   path: '/login',
+    //   name: 'auth-login',
+    //   component: () => import('@/views/common/auth/pages/Login.vue'),
+    //   meta: {
+    //     layout: 'auth',
+    //     resource: 'Auth',
+    //     redirectIfLoggedIn: true,
+    //   },
+    // },
     {
       path: '/nao-autorizado',
       name: 'misc-not-authorized',
@@ -57,13 +57,13 @@ const router = new VueRouter({
 router.beforeEach((to, _, next) => {
   const isLoggedIn = isUserLoggedIn()
 
-  if (canNavigate(to)) {
-    // Redirect to log in if not logged in
-    if (!isLoggedIn) return next({ name: 'auth-login' })
+  // if (canNavigate(to)) {
+  //   // Redirect to log in if not logged in
+  //   if (!isLoggedIn) return next({ name: 'auth-login' })
 
-    // If logged in => not authorized
-    return next({ name: 'misc-not-authorized' })
-  }
+  //   // If logged in => not authorized
+  //   return next({ name: 'misc-not-authorized' })
+  // }
 
   // Redirect if logged in
   if (to.meta.redirectIfLoggedIn && isLoggedIn) {

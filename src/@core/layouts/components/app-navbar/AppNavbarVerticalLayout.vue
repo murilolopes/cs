@@ -14,9 +14,9 @@
       <div class="d-flex justify-content-center align-items-center">
         <span>
           Portal do
-          <h4>Investidor</h4>
+          <h4>{{ portalByUserType.title }}</h4>
         </span>
-        <b-img src="@/assets/images/portal-investidor-icon.svg" class="ml-1" />
+        <b-img :src="portalByUserType.icon" class="ml-1" />
       </div>
       <!-- Bookmarks Container -->
       <!-- <bookmarks /> -->
@@ -69,6 +69,24 @@ export default {
     toggleVerticalMenuActive: {
       type: Function,
       default: () => {},
+    },
+  },
+  computed: {
+    portalByUserType() {
+      const types = {
+        'Admin::User': {
+          title: 'Administrador',
+          icon: require('@/assets/images/portal-investidor-icon.svg'),
+        },
+        'Investidor::User': {
+          title: 'Investidor',
+          icon: require('@/assets/images/portal-investidor-icon.svg'),
+        },
+      }
+      return types[this.userType]
+    },
+    userType() {
+      return this.$store.state.auth.userData.type
     },
   },
 }

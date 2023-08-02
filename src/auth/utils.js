@@ -7,7 +7,9 @@ import useJwt from '@/auth/jwt/useJwt'
  */
 // eslint-disable-next-line arrow-body-style
 export const isUserLoggedIn = () => {
-  return localStorage.getItem('userData') && localStorage.getItem(useJwt.jwtConfig.storageTokenKeyName)
+  return (
+    localStorage.getItem('userData') && localStorage.getItem(useJwt.jwtConfig.storageTokenKeyName)
+  )
 }
 
 export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
@@ -18,11 +20,11 @@ export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
  * Please note role field is just for showing purpose it's not used by anything in frontend
  * We are checking role just for ease
  * NOTE: If you have different pages to navigate based on user ability then this function can be useful. However, you need to update it.
- * @param {String} userRole Role of user
+ * @param {String} userType Role of user
  */
-export const getHomeRouteForLoggedInUser = (userRole, economicGroup) => {
-  if (userRole === 'admin') return '/admin/dashboard'
-  if (userRole === 'cedente') return '/dashboard'
-  if (userRole === 'parceiro') return '/parceiro/dashboard'
+export const getHomeRouteForLoggedInUser = (userType) => {
+  if (userType === 'Admin::User') return '/admin/dashboard'
+  if (userType === 'Admin::Investidor') return '/investidor/dashboard'
+  if (userType === 'Admin::Fornecedor') return '/cedente/dashboard'
   return { name: 'auth-login' }
 }

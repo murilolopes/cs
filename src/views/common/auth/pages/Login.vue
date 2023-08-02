@@ -1,6 +1,16 @@
 <template>
   <b-col sm="12" md="12" lg="12" xl="8" class="m-auto">
-    <h1 class="text-dark">Faça seu login</h1>
+    <div
+      class="border-primary d-flex justify-content-between align-items-center rounded-lg overflow-hidden mb-2"
+    >
+      <div class="d-flex flex-column pl-2">
+        <span class="">Portal do</span>
+        <h2 class="mb-0">{{ $route.meta.layoutPage.formCard.title }}</h2>
+      </div>
+      <div class="bg-primary">
+        <b-img :src="$route.meta.layoutPage.formCard.icon" width="75" class="m-75" />
+      </div>
+    </div>
     <span>Insira seu e-mail e senha para continuar.</span>
     <validation-observer ref="loginForm" #default="{ invalid }">
       <b-form class="auth-login-form mt-2" @submit.prevent="login">
@@ -22,7 +32,16 @@
           </validation-provider>
         </b-form-group>
 
-        <b-form-group label="Senha" label-for="login-password">
+        <b-form-group>
+          <div class="d-flex justify-content-between mt-1">
+            <label for="login-password" class="mb-50">Senha</label>
+            <span
+              class="text-warning h5 text-underline cursor-pointer mb-50"
+              @click="$bvModal.show('resetPassword')"
+            >
+              Esqueci minha senha
+            </span>
+          </div>
           <validation-provider #default="{ errors }" name="Senha" vid="password" rules="required">
             <b-input-group
               class="input-group-merge"
@@ -50,24 +69,25 @@
         </b-form-group>
 
         <b-form-group>
-          <b-form-checkbox id="remember-me" class="custom-control-success" switch>
+          <b-form-checkbox id="remember-me" class="custom-control-successm mt-1" switch>
             Lembrar informações
           </b-form-checkbox>
         </b-form-group>
 
         <b-button type="submit" variant="primary" block :disabled="invalid || loading">
-          {{ loading ? 'Carregando...' : 'Login' }}
+          {{ loading ? 'Carregando...' : 'Entrar' }}
           <b-spinner small v-if="loading" />
         </b-button>
+
+        <div class="mt-1">
+          <span class=""> Não possui uma conta? </span>
+          <router-link :to="{ name: 'investor.register' }" class="text-warning underscore">
+            Crie sua conta
+          </router-link>
+        </div>
       </b-form>
     </validation-observer>
-    <div class="mt-2">
-      <span
-        class="text-primary h5 text-underline cursor-pointer"
-        @click="$bvModal.show('resetPassword')"
-        >Esqueci minha senha</span
-      >
-    </div>
+    <div class="mt-2"></div>
 
     <b-modal id="resetPassword" centered hide-footer header-bg-variant="white">
       <div class="d-flex flex-column justify-content-center align-items-start">
@@ -187,8 +207,6 @@ export default {
   data() {
     return {
       loading: false,
-      logoBig: require('@/assets/images/logo/logo-grande-ac.svg'),
-      auxLogo: require('@/assets/images/img-pag-cartao.png'),
       password: '',
       userEmail: '',
       required,
@@ -197,11 +215,6 @@ export default {
         email: '',
       },
     }
-  },
-  computed: {
-    passwordToggleIcon() {
-      return this.passwordFieldType === 'password' ? 'EyeIcon' : 'EyeOffIcon'
-    },
   },
   methods: {
     async login() {
@@ -215,32 +228,26 @@ export default {
           password: this.password,
         })
 
-        this.$ability.update(data.user_data.ability)
+        this.$ability.update(data.user.ability || [])
 
-        if (data.user_data.user_type === 'cedente')
+        if (data.user.type === 'cedente')
           await this.$store.dispatch('auth/getCurrentEconomicGroupData')
 
-        this.$router
-          .replace(
-            getHomeRouteForLoggedInUser(
-              data.user_data.user_type,
-              this.$store.state.auth.currentEconomicGroup,
-            ),
-          )
-          .then(() => {
-            this.$toast({
-              component: ToastificationContent,
-              position: 'top-right',
-              props: {
-                title: `Boas vindas ${data.user_data.name}`,
-                icon: 'CoffeeIcon',
-                avatarVariant: 'success',
-                titleVariant: 'success',
-                text: `Login efetuado com sucesso!`,
-              },
-            })
+        this.$router.replace(getHomeRouteForLoggedInUser(data.user.type)).then(() => {
+          this.$toast({
+            component: ToastificationContent,
+            position: 'top-right',
+            props: {
+              title: `Boas vindas ${data.user.nome}`,
+              icon: 'CoffeeIcon',
+              avatarVariant: 'success',
+              titleVariant: 'success',
+              text: `Login efetuado com sucesso!`,
+            },
           })
+        })
       } catch (error) {
+        console.log(1, error)
         this.$swal({
           title: 'Erro!',
           text: error.response.data.error,
@@ -272,6 +279,11 @@ export default {
           confirmButtonText: 'Ok',
         })
       }
+    },
+  },
+  computed: {
+    passwordToggleIcon() {
+      return this.passwordFieldType === 'password' ? 'EyeIcon' : 'EyeOffIcon'
     },
   },
 }

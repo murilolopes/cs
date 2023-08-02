@@ -9,11 +9,7 @@ export default {
       contentWidth: ' full',
       menu: {
         hidden: false,
-        navigationItems: {
-          admin: [],
-          cedente: [],
-          parceiro: [],
-        }
+        navigationItems: {},
       },
       navbar: {
         type: 'floating',
@@ -27,16 +23,14 @@ export default {
   mutations: {
     TOGGLE_RTL(state) {
       state.layout.isRTL = !state.layout.isRTL
-      document.documentElement.setAttribute(
-        'dir',
-        state.layout.isRTL ? 'rtl' : 'ltr',
-      )
+      document.documentElement.setAttribute('dir', state.layout.isRTL ? 'rtl' : 'ltr')
     },
     UPDATE_SKIN(state, skin) {
       state.layout.skin = skin
       localStorage.setItem('vuexy-skin', skin)
       if (skin === 'dark') document.body.classList.add('dark-layout')
-      else if (document.body.className.match('dark-layout')) document.body.classList.remove('dark-layout')
+      else if (document.body.className.match('dark-layout'))
+        document.body.classList.remove('dark-layout')
     },
     UPDATE_ROUTER_TRANSITION(state, val) {
       state.layout.routerTransition = val

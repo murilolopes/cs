@@ -32,40 +32,47 @@ export default {
   computed: {
     menus() {
       const menus = {
-        admin: [
+        'Admin::User': [
           {
             title: 'Dashboard Admin',
             icon: 'GridIcon',
-            route: 'admin-dashboard',
+            route: 'admin.dashboard',
+            action: 'admin-read',
+            resource: 'admin-user',
+          },
+          {
+            title: 'Perfil',
+            icon: 'UserIcon',
+            route: 'admin.profile',
             action: 'admin-read',
             resource: 'admin-user',
           },
         ],
-        investidor: [
+        'Investidor::User': [
           {
             title: 'Emissões',
             icon: 'DollarSignIcon',
             route: 'investor.emissions',
-            action: 'admin-read',
-            resource: 'admin-user',
+            action: 'investidor-read',
+            resource: 'investidor-user',
           },
           {
             title: 'Calculadora',
             icon: 'GridIcon',
-            route: 'admin-dashboard',
-            action: 'admin-read',
-            resource: 'admin-user',
+            route: 'investor.calculator',
+            action: 'investidor-read',
+            resource: 'investidor-user',
           },
           {
-            title: 'Minha conta',
+            title: 'Perfil',
             icon: 'UserIcon',
-            route: 'admin-dashboard',
-            action: 'admin-read',
-            resource: 'admin-user',
+            route: 'investor.profile',
+            action: 'investidor-read',
+            resource: 'investidor-user',
           },
         ],
       }
-      return menus[this.$store.state.auth.userData.user_type]
+      return menus[this.$store.state.auth.userData.type]
     },
   },
 }

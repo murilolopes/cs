@@ -1,12 +1,30 @@
 export default [
   {
     path: '/investidor/login',
-    name: 'investor-auth-login',
+    name: 'investor.login',
     component: () => import('@/views/common/auth/pages/Login.vue'),
     meta: {
       layout: 'auth',
       resource: 'Auth',
-      redirectIfLoggedIn: false,
+      redirectIfLoggedIn: true,
+      layoutPage: {
+        formCard: {
+          title: 'Investidor',
+          icon: require('@/assets/images/investidor/login-icon.svg'),
+        },
+        appLogoGrande: require('@/assets/images/investidor/cs-logo-login.svg'),
+        cardToMoney: require('@/assets/images/investidor/login-image.svg'),
+      },
+    },
+  },
+  {
+    path: '/investidor/cadastro',
+    name: 'investor.register',
+    component: () => import('@/views/common/auth/pages/Register.vue'),
+    meta: {
+      layout: 'auth',
+      resource: 'Auth',
+      redirectIfLoggedIn: true,
     },
   },
   {
@@ -97,7 +115,7 @@ export default [
   },
   {
     path: '/investidor/emissoes/:id/detalhes',
-    name: 'detalhes',
+    name: 'investor.details',
     component: () => import('@/views/investor/pages/Detalhes.vue'),
     meta: {
       action: 'investor-read',
@@ -109,7 +127,7 @@ export default [
   },
   {
     path: '/investidor/calculadora',
-    name: 'precosUnicos',
+    name: 'investor.calculator',
     component: () => import('@/views/investor/pages/Calculator.vue'),
     meta: {
       action: 'investor-read',
@@ -118,7 +136,7 @@ export default [
   },
   {
     path: '/investidor/perfil',
-    name: 'profile',
+    name: 'investor.profile',
     component: () => import('@/views/investor/pages/Profile.vue'),
     meta: {
       action: 'investor-read',

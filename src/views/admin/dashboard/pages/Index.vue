@@ -344,7 +344,7 @@ export default {
     newEconomicGroup() {
       console.log(1, this.economicGroup)
       this.$router.push({
-        name: 'admin-economicGroup.companies',
+        name: 'admin.economicGroup.companies',
         params: { id: this.economicGroup },
       })
     },
