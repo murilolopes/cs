@@ -167,77 +167,9 @@
         </b-card>
       </b-col>
     </b-row>
-    <b-row>
-      <b-col cols="12">
-        <b-card class="mb-1 emission-card-border">
-          <h4 class="font-weight-bolder">Calculadora CREDITSEC</h4>
-          <hr />
-          <div class="d-flex justify-content-between align-items-center">
-            <b-button-group class="mb-2 text-nowrap mr-3">
-              <b-button
-                :variant="selectedButtonVariant.price"
-                class="text-dark"
-                @click="selectButton('price')"
-              >
-                <strong>Preço</strong>
-              </b-button>
-              <b-button
-                :variant="selectedButtonVariant.tax"
-                class="text-dark"
-                @click="selectButton('tax')"
-              >
-                <strong>Taxas</strong>
-              </b-button>
-            </b-button-group>
 
-            <b-button
-              variant="primary"
-              class="text-dark"
-              @click="calculateTax"
-              :disabled="!canCalculateTax"
-            >
-              <strong>Calcular</strong>
-            </b-button>
-          </div>
-          <div class="d-flex justify-content-end align-items-end text-nowrap">
-            <b-form-group label="Código IF B3" label-for="if_b3" class="mb-0 max-w-10">
-              <b-form-input v-model="emissao.codigo_isin" name="if_b3" readonly />
-            </b-form-group>
-            <b-form-group label="Data do Cálculo" label-for="calcDate" class="mb-0 ml-1">
-              <div class="input-icon">
-                <flat-pickr
-                  v-model="calcDate"
-                  class="form-control"
-                  :config="{ dateFormat: 'd/m/Y' }"
-                />
-                <feather-icon icon="CalendarIcon" size="22" class="icon-position text-success" />
-              </div>
-            </b-form-group>
-            <div
-              v-if="selectedButton === 'tax'"
-              class="d-flex justify-content-end align-items-end ml-1"
-            >
-              <b-form-group label="Taxa" label-for="tax" class="mb-0">
-                <v-select v-model="tax" :options="taxOptions" :clearable="false" />
-              </b-form-group>
-              <feather-icon icon="PlusIcon" size="22" class="mb-75 mr-1 ml-1" />
-              <b-form-group class="mb-0 max-w-6">
-                <money v-model="taxValue" class="form-control" v-bind="percentage" maxlength="7" />
-              </b-form-group>
-            </div>
-            <div v-else class="ml-1">
-              <b-form-group class="mb-0">
-                <money v-model="moneyValue" class="form-control" />
-              </b-form-group>
-            </div>
-            <feather-icon icon="PauseIcon" size="22" class="rotate-90 mb-75 mr-1 ml-1" />
-            <b-form-group class="mb-0">
-              <b-form-input v-model="result" name="result" disabled />
-            </b-form-group>
-          </div>
-        </b-card>
-      </b-col>
-    </b-row>
+    <calculator :isin="emissao.codigo_isin" />
+
     <b-row v-for="(doc, index) in docs" :key="index">
       <b-col cols="12">
         <b-card-actions
@@ -304,6 +236,7 @@ import flatPickr from 'vue-flatpickr-component'
 // eslint-disable-next-line import/no-cycle
 import { formatDate } from '@core/utils/filter'
 import { downloadFromResponse } from '@/@core/comp-functions/forms/cc-dropzone'
+import Calculator from '@/views/investor/components/Calculator.vue'
 
 export default {
   name: 'Emissoes',
@@ -321,6 +254,7 @@ export default {
     vSelect,
     flatPickr,
     BFormInput,
+    Calculator,
     VueApexCharts,
   },
   filters: {
@@ -329,10 +263,6 @@ export default {
   },
   data() {
     return {
-      result: '',
-      taxValue: '',
-      moneyValue: '',
-      calcDate: '',
       selectedButton: 'price',
       pusGraph: {
         series: [],
@@ -397,21 +327,6 @@ export default {
           colors: ['#3FE4A9'],
         },
       },
-      if_b3: '',
-      tax: {
-        label: 'IPCA (Acumulado) + X%',
-        value: 1,
-      },
-      taxOptions: [
-        {
-          label: 'IPCA (Acumulado) + X%',
-          value: 1,
-        },
-        {
-          label: 'X% do valor na data',
-          value: 2,
-        },
-      ],
       items: [
         {
           data: '28/02/2023',
@@ -482,12 +397,6 @@ export default {
           shared: false,
         },
         colors: ['#E3C092', '#C9794A', '#3FE4A9'],
-      },
-      percentage: {
-        max: 100,
-        suffix: '%',
-        prefix: '',
-        precision: 2,
       },
       docs: [],
       docFields: [
