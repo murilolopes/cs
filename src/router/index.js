@@ -17,17 +17,9 @@ const router = new VueRouter({
     return { x: 0, y: 0 }
   },
   routes: [
-    // { path: '/', redirect: { name: 'dashboard' } },
-    // {
-    //   path: '/login',
-    //   name: 'auth-login',
-    //   component: () => import('@/views/common/auth/pages/Login.vue'),
-    //   meta: {
-    //     layout: 'auth',
-    //     resource: 'Auth',
-    //     redirectIfLoggedIn: true,
-    //   },
-    // },
+    { path: '/', redirect: { name: 'admin.login' } },
+    { path: '/admin', redirect: { name: 'admin.dashboard' } },
+    { path: '/investidor', redirect: { name: 'investor.emissions' } },
     {
       path: '/nao-autorizado',
       name: 'misc-not-authorized',
@@ -51,37 +43,48 @@ const router = new VueRouter({
     ...admin,
     ...investor,
     ...publicComponents,
+    { path: '/admin/*', redirect: { name: 'admin.emissions' } },
+    { path: '/investidor/*', redirect: { name: 'investor.emissions' } },
   ],
 })
 
 router.beforeEach((to, _, next) => {
   const isLoggedIn = isUserLoggedIn()
 
-  // if (canNavigate(to)) {
-  //   // Redirect to log in if not logged in
-  //   if (!isLoggedIn) return next({ name: 'auth-login' })
+  if (canNavigate(to)) {
+    // Redirect to log in if not logged in
+    if (!isLoggedIn) return next({ name: 'admin.login' })
 
-  //   // If logged in => not authorized
-  //   return next({ name: 'misc-not-authorized' })
-  // }
+    // If logged in => not authorized
+    return next({ name: 'misc-not-authorized' })
+  }
 
+  const userData = getUserData()
   // Redirect if logged in
-  if (to.meta.redirectIfLoggedIn && isLoggedIn) {
-    const userData = getUserData()
-    next(getHomeRouteForLoggedInUser(userData ? userData.user_type : null))
+  if (to.meta.redirectIfLoggedIn && isLoggedIn) next(getHomeRouteForLoggedInUser(userData?.type))
+
+  if (!canNavigate(to) && !isLoggedIn && !to.meta.redirectIfLoggedIn) {
+    const correctLoginRoute = {
+      admin: 'admin.login',
+      investor: 'investor.login',
+    }
+
+    return next({ name: correctLoginRoute[to.name.split('.')[0]] })
+  }
+
+  const userType = {
+    'Admin::User': 'admin',
+    'Investidor::User': 'investor',
+  }
+  const userDiffRouter =
+    userType[userData?.type] != to.name.split('.')[0] && to.name != 'misc-not-authorized'
+
+  console.log(2, isLoggedIn, userDiffRouter, to.name)
+  if (isLoggedIn && to.name != 'misc-not-authorized' && userDiffRouter) {
+    return next({ name: 'misc-not-authorized' })
   }
 
   return next()
-})
-
-// ? For splash screen
-// Remove afterEach hook if you are not using splash screen
-router.afterEach(() => {
-  // Remove initial loading
-  const appLoading = document.getElementById('loading-bg')
-  if (appLoading) {
-    appLoading.style.display = 'none'
-  }
 })
 
 export default router

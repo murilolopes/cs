@@ -83,7 +83,12 @@ export default {
           icon: require('@/assets/images/portal-investidor-icon.svg'),
         },
       }
-      return types[this.userType]
+      return (
+        types[this.userType] || {
+          title: 'Administrador',
+          icon: require('@/assets/images/portal-investidor-icon.svg'),
+        }
+      )
     },
     userType() {
       return this.$store.state.auth.userData.type

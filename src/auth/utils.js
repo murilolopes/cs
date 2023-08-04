@@ -7,7 +7,7 @@ import useJwt from '@/auth/jwt/useJwt'
  */
 // eslint-disable-next-line arrow-body-style
 export const isUserLoggedIn = () => {
-  return (
+  return !!(
     localStorage.getItem('userData') && localStorage.getItem(useJwt.jwtConfig.storageTokenKeyName)
   )
 }
@@ -24,7 +24,6 @@ export const getUserData = () => JSON.parse(localStorage.getItem('userData'))
  */
 export const getHomeRouteForLoggedInUser = (userType) => {
   if (userType === 'Admin::User') return '/admin/dashboard'
-  if (userType === 'Admin::Investidor') return '/investidor/dashboard'
-  if (userType === 'Admin::Fornecedor') return '/cedente/dashboard'
-  return { name: 'auth-login' }
+  if (userType === 'Investidor::User') return '/investidor/dashboard'
+  return { name: 'admin.dashboard' }
 }
