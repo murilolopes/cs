@@ -1,4 +1,5 @@
 import Emissions from '@/services/emissions'
+import Profile from '@/services/profile'
 
 const fetchEmissions = ({}, payload) => {
   return new Promise((resolve, reject) => {
@@ -79,6 +80,14 @@ const getDocs = ({}, payload) => {
   })
 }
 
+const updateInvestorProfile = ({}, payload) => {
+  return new Promise((resolve, reject) => {
+    Profile.updateInvestorProfile(payload)
+      .then((response) => resolve(response))
+      .catch((error) => reject(error))
+  })
+}
+
 export default {
   pus,
   getDocs,
@@ -87,5 +96,6 @@ export default {
   calcDesagio,
   fetchEmissions,
   paymentHistory,
+  updateInvestorProfile,
   downloadPusHistory,
 }

@@ -19,39 +19,45 @@
             <b-button variant="outline-primary bg-white text-dark" @click="$emit('cancel')">
               Cancelar
             </b-button>
-            <b-button variant="primary bg-white text-dark ml-2">Editar</b-button>
+            <b-button
+              variant="primary bg-white text-dark ml-2"
+              @click="updateProfile()"
+              :disabled="invalid"
+            >
+              Salvar
+            </b-button>
           </div>
         </div>
         <hr />
         <b-form-group label-class="font-weight-bold" label-cols="12" class="mb-0">
           <b-form-row>
             <b-col cols="3">
-              <b-form-group label="Nome" label-for="name">
-                <validation-provider #default="{ errors }" name="name" vid="name" rules="required">
+              <b-form-group label="Nome" label-for="nome">
+                <validation-provider #default="{ errors }" name="nome" vid="nome" rules="required">
                   <b-form-input
-                    id="name"
-                    v-model="user.name"
+                    id="nome"
+                    v-model="user.nome"
                     :state="errors.length > 0 ? false : null"
-                    name="name"
+                    name="nome"
                   />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
               </b-form-group>
             </b-col>
             <b-col cols="3">
-              <b-form-group label="Celular" label-for="phone">
+              <b-form-group label="Celular" label-for="telefone">
                 <validation-provider
                   #default="{ errors }"
-                  name="phone"
-                  vid="phone"
+                  name="telefone"
+                  vid="telefone"
                   rules="required"
                 >
                   <b-form-input
-                    id="phone"
-                    v-model="user.phone"
+                    id="telefone"
+                    v-model="user.telefone"
                     v-mask="['(##) #####-####']"
                     :state="errors.length > 0 ? false : null"
-                    name="phone"
+                    name="telefone"
                   />
                   <small class="text-danger">{{ errors[0] }}</small>
                 </validation-provider>
@@ -69,7 +75,7 @@
               </b-form-group>
             </b-col>
             <b-col cols="3">
-              <b-form-group v-slot="{ ariaDescribedby }" label="Email" label-for="apto_para_operar">
+              <b-form-group label="Email" label-for="apto_para_operar">
                 <validation-provider
                   #default="{ errors }"
                   name="email"
@@ -79,7 +85,6 @@
                   <b-form-input
                     id="email"
                     v-model="user.email"
-                    v-mask="'#.##'"
                     :state="errors.length > 0 ? false : null"
                     name="email"
                   />
@@ -170,13 +175,7 @@
           </b-form-group>
 
           <div class="d-flex flex-row justify-content-around mt-1">
-            <b-button
-              variant="outline-primary"
-              class="mb-1 mr-1"
-              @click="$bvModal.hide('modalResendInvite')"
-            >
-              Cancelar
-            </b-button>
+            <b-button variant="outline-primary" class="mb-1 mr-1" @click=""> Cancelar </b-button>
             <b-button variant="primary" class="mb-1" @click="" :disabled="invalid">
               Continuar
             </b-button>
@@ -209,7 +208,7 @@ import { required, cpf } from '@validations'
 import { mask } from 'vue-the-mask'
 
 export default {
-  name: 'EmissionCard',
+  name: 'ProfileForm',
   components: {
     BCard,
     BCol,
@@ -232,7 +231,7 @@ export default {
   props: {
     profile: {
       type: Object,
-      required: false,
+      required: true,
     },
   },
   data() {
@@ -242,17 +241,33 @@ export default {
         newPassword: '',
       },
       user: {
-        name: '',
-        phone: '',
+        nome: '',
+        telefone: '',
         cpf: '',
         email: '',
       },
     }
   },
   mounted() {
-    // this.user = this.profile
+    this.user.nome = this.profile.nome
+    this.user.telefone = this.profile.telefone
+    this.user.cpf = this.profile.cpf
+    this.user.email = this.profile.email
   },
-  methods: {},
+  methods: {
+    async updateProfile() {
+      try {
+        await this.$store.dispatch('investor/updateInvestorProfile', this.user)
+        this.$swal.fire({
+          title: 'Sucesso!',
+          text: 'Perfil atualizado com sucesso!',
+          icon: 'success',
+          confirmButtonText: 'Ok',
+        })
+        this.$emit('cancel')
+      } catch (error) {}
+    },
+  },
 }
 </script>
 

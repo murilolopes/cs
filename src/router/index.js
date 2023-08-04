@@ -79,7 +79,6 @@ router.beforeEach((to, _, next) => {
   const userDiffRouter =
     userType[userData?.type] != to.name.split('.')[0] && to.name != 'misc-not-authorized'
 
-  console.log(2, isLoggedIn, userDiffRouter, to.name)
   if (isLoggedIn && to.name != 'misc-not-authorized' && userDiffRouter) {
     return next({ name: 'misc-not-authorized' })
   }

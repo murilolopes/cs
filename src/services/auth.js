@@ -10,7 +10,7 @@ class Auth {
   }
 
   userData() {
-    return http.get('/backoffice/empresas/current')
+    return http.get('/auth/current')
   }
 
   sendResetPasswordEmail(payload) {

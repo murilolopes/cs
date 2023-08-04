@@ -8,37 +8,37 @@
               <feather-icon icon="UserIcon" size="40" class="text-warning mr-2" />
               <div class="d-flex flex-column justify-content-between">
                 <span>Nome</span>
-                <p class="mb-0">Luke Skywalker</p>
+                <p class="mb-0">{{ user.nome || '-' }}</p>
               </div>
             </div>
           </b-card>
           <b-card class="mb-0 card-cs-bg">
             <div class="d-flex flex-column">
               <span>Celular</span>
-              <p class="mb-0">82 99669-8304</p>
+              <p class="mb-0">{{ user.telefone || '-' }}</p>
             </div>
           </b-card>
           <b-card class="mb-0 card-cs-bg">
             <div class="d-flex flex-column">
               <span>CPF</span>
-              <p class="mb-0">356.256.845-00</p>
+              <p class="mb-0">{{ user.cpf || '-' }}</p>
             </div>
           </b-card>
           <b-card class="mb-0 card-cs-bg">
             <div class="d-flex flex-column">
               <span>Email</span>
-              <p class="mb-0">lightside@jedisorder.com.br</p>
+              <p class="mb-0">{{ user.email || '-' }}</p>
             </div>
           </b-card>
         </div>
 
-        <b-button variant="outline-primary bg-white text-dark" @click="showForm = true"
-          >Editar</b-button
-        >
+        <b-button variant="outline-primary bg-white text-dark" @click="showForm = true">
+          Editar
+        </b-button>
       </div>
     </b-card>
 
-    <profile-form v-else @cancel="showForm = false" />
+    <profile-form v-else @cancel="updateData" :profile="user" />
   </b-card>
 </template>
 
@@ -60,9 +60,29 @@ export default {
   data() {
     return {
       showForm: false,
+      user: {
+        nome: '',
+        email: '',
+        phone: '',
+        cpf: '',
+      },
     }
   },
-  mounted() {},
+  async mounted() {
+    await this.getUser()
+  },
+  methods: {
+    updateData() {
+      this.showForm = false
+      this.getUser()
+    },
+    async getUser() {
+      try {
+        const { data } = await this.$store.dispatch('auth/getUserData')
+        this.user = data.data
+      } catch (error) {}
+    },
+  },
 }
 </script>
 
