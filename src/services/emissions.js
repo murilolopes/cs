@@ -1,40 +1,44 @@
 import http from '@/services/http'
 
 class Emissions {
+  constructor(api_type = 'publico') {
+    this.api_type = api_type
+  }
+
   fetch(payload) {
-    return http.get('/emissoes', { params: payload })
+    return http.get(`${this.api_type}/emissoes`, { params: payload })
   }
 
   get(payload) {
-    return http.get(`/emissoes/${payload}`)
+    return http.get(`${this.api_type}/emissoes/${payload}`)
   }
 
   paymentHistory(payload) {
-    return http.get(`/emissoes/${payload}/grafico_historico_pagamentos`)
+    return http.get(`${this.api_type}/emissoes/${payload}/grafico_historico_pagamentos`)
   }
 
   pusGraph(payload) {
-    return http.get(`/emissoes/${payload.id}/grafico_pus`, { params: payload })
+    return http.get(`${this.api_type}/emissoes/${payload.id}/grafico_pus`, { params: payload })
   }
 
   calcDesagio(payload) {
-    return http.post(`/emissoes/${payload.id}/calc_desagio`, payload)
+    return http.post(`${this.api_type}/emissoes/${payload.id}/calc_desagio`, payload)
   }
 
   pus(payload) {
-    return http.get(`/emissoes/${payload}/pus`)
+    return http.get(`${this.api_type}/emissoes/${payload}/pus`)
   }
 
   getDocs(payload) {
-    return http.get(`/emissoes/${payload}/documentos`)
+    return http.get(`${this.api_type}/emissoes/${payload}/documentos`)
   }
 
   downloadPusHistory(payload) {
-    return http.post(`/emissoes/${payload.id}/download_historico_pus`, {
+    return http.post(`${this.api_type}/emissoes/${payload.id}/download_historico_pus`, {
       ...payload,
       responseType: 'blob',
     })
   }
 }
 
-export default new Emissions()
+export default Emissions

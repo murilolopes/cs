@@ -68,7 +68,7 @@
       <b-button
         variant="primary"
         class="emissoes-details-button w-100 border-primary"
-        @click="$router.push({ name: 'detalhes', params: { id: emission.id } })"
+        @click="$router.push({ name: 'investor.details', params: { id: emission.id } })"
       >
         <span class="text-dark d-flex justify-content-center align-items-center font-weight-bolder">
           Detalhes
