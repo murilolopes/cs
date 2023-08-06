@@ -119,15 +119,10 @@
 
         <validation-observer ref="resetForm" #default="{ invalid }" class="w-100">
           <b-form-group label="Senha atual" label-for="password" class="d-flex flex-column mb-2">
-            <validation-provider
-              #default="{ errors }"
-              name="Senha"
-              vid="password"
-              rules="required|password"
-            >
+            <validation-provider #default="{ errors }" name="Senha" vid="password" rules="required">
               <b-form-input
                 id="password"
-                v-model="newPassword.password"
+                v-model="newPassword.currentPassword"
                 :state="errors.length > 0 ? false : null"
                 name="password"
                 class="w-100"
@@ -136,12 +131,7 @@
             </validation-provider>
           </b-form-group>
           <b-form-group label="Nova senha" label-for="password" class="d-flex flex-column mb-2">
-            <validation-provider
-              #default="{ errors }"
-              name="Senha"
-              vid="password"
-              rules="required|password"
-            >
+            <validation-provider #default="{ errors }" name="Senha" vid="password" rules="required">
               <b-form-input
                 id="password"
                 v-model="newPassword.newPassword"
@@ -157,12 +147,7 @@
             label-for="password"
             class="d-flex flex-column mb-2"
           >
-            <validation-provider
-              #default="{ errors }"
-              name="Senha"
-              vid="password"
-              rules="required|password"
-            >
+            <validation-provider #default="{ errors }" name="Senha" vid="password" rules="required">
               <b-form-input
                 id="password"
                 v-model="newPassword.newPasswordConfirmation"
@@ -175,9 +160,15 @@
           </b-form-group>
 
           <div class="d-flex flex-row justify-content-around mt-1">
-            <b-button variant="outline-primary" class="mb-1 mr-1" @click=""> Cancelar </b-button>
-            <b-button variant="primary" class="mb-1" @click="" :disabled="invalid">
-              Continuar
+            <b-button
+              variant="outline-primary"
+              class="mb-1 mr-1 text-dark font-weight-bolder"
+              @click="$bvModal.hide('modal-password')"
+            >
+              Cancelar
+            </b-button>
+            <b-button variant="primary" class="mb-1" @click="updatePassword" :disabled="invalid">
+              <span class="text-dark font-weight-bolder">Continuar</span>
             </b-button>
           </div>
         </validation-observer>
@@ -237,6 +228,7 @@ export default {
   data() {
     return {
       newPassword: {
+        currentPassword: '',
         password: '',
         newPassword: '',
       },
@@ -255,6 +247,32 @@ export default {
     this.user.email = this.profile.email
   },
   methods: {
+    async updatePassword() {
+      try {
+        this.$swal
+          .fire({
+            title: 'Deseja continuar?',
+            text: 'Você está prestes a atualizar sua senha.',
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Sair',
+            confirmButtonText: 'Atualizar!',
+          })
+          .then(async (result) => {
+            if (result.value) {
+              await this.$store.dispatch('investor/updateInvestorPassword', this.newPassword)
+              this.$swal.fire({
+                title: 'Sucesso!',
+                text: 'Senha atualizada com sucesso!',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+              })
+              this.$bvModal.hide('modal-password')
+              this.$emit('cancel')
+            }
+          })
+      } catch (error) {}
+    },
     async updateProfile() {
       try {
         await this.$store.dispatch('investor/updateInvestorProfile', this.user)
