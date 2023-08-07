@@ -24,6 +24,10 @@ class Auth {
   newPassword(payload) {
     return http.put(`/password_reset/${payload.token}`, { password: payload })
   }
+
+  updatePassword(payload) {
+    return http.post(`/auth/change_current_password`, { user: payload })
+  }
 }
 
 export default new Auth()

@@ -65,13 +65,7 @@
             </b-col>
             <b-col cols="3">
               <b-form-group label="CPF" label-for="cpf">
-                <b-form-input
-                  id="cpf"
-                  v-model="user.cpf"
-                  v-mask="'###.###.###-##'"
-                  disabled
-                  name="cpf"
-                />
+                <b-form-input id="cpf" v-model="user.cpf" v-mask="'###.###.###-##'" name="cpf" />
               </b-form-group>
             </b-col>
             <b-col cols="3">
@@ -119,25 +113,37 @@
 
         <validation-observer ref="resetForm" #default="{ invalid }" class="w-100">
           <b-form-group label="Senha atual" label-for="password" class="d-flex flex-column mb-2">
-            <validation-provider #default="{ errors }" name="Senha" vid="password" rules="required">
+            <validation-provider
+              #default="{ errors }"
+              name="Senha atual"
+              vid="password"
+              rules="required"
+            >
               <b-form-input
                 id="password"
-                v-model="newPassword.currentPassword"
+                v-model="newPassword.current_password"
                 :state="errors.length > 0 ? false : null"
                 name="password"
+                type="password"
                 class="w-100"
               />
               <small class="text-danger">{{ errors[0] }}</small>
             </validation-provider>
           </b-form-group>
           <b-form-group label="Nova senha" label-for="password" class="d-flex flex-column mb-2">
-            <validation-provider #default="{ errors }" name="Senha" vid="password" rules="required">
+            <validation-provider
+              #default="{ errors }"
+              name="Nova enha"
+              vid="password"
+              rules="required"
+            >
               <b-form-input
                 id="password"
-                v-model="newPassword.newPassword"
+                v-model="newPassword.password"
                 :state="errors.length > 0 ? false : null"
                 name="password"
                 class="w-100"
+                type="password"
               />
               <small class="text-danger">{{ errors[0] }}</small>
             </validation-provider>
@@ -147,12 +153,18 @@
             label-for="password"
             class="d-flex flex-column mb-2"
           >
-            <validation-provider #default="{ errors }" name="Senha" vid="password" rules="required">
+            <validation-provider
+              #default="{ errors }"
+              name="Confirmação de senha"
+              vid="password_confirmation"
+              rules="confirmed:password"
+            >
               <b-form-input
-                id="password"
-                v-model="newPassword.newPasswordConfirmation"
+                id="password_confirmation"
+                v-model="newPassword.password_confirmation"
                 :state="errors.length > 0 ? false : null"
-                name="password"
+                name="password_confirmation"
+                type="password"
                 class="w-100"
               />
               <small class="text-danger">{{ errors[0] }}</small>
@@ -195,7 +207,7 @@ import {
   BFormTextarea,
 } from 'bootstrap-vue'
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
-import { required, cpf } from '@validations'
+import { required, cpf, confirmed } from '@validations'
 import { mask } from 'vue-the-mask'
 
 export default {
@@ -227,10 +239,11 @@ export default {
   },
   data() {
     return {
+      password: '',
       newPassword: {
-        currentPassword: '',
         password: '',
-        newPassword: '',
+        current_password: '',
+        password_confirmation: '',
       },
       user: {
         nome: '',
@@ -260,7 +273,7 @@ export default {
           })
           .then(async (result) => {
             if (result.value) {
-              await this.$store.dispatch('investor/updateInvestorPassword', this.newPassword)
+              await this.$store.dispatch('auth/updatePassword', this.newPassword)
               this.$swal.fire({
                 title: 'Sucesso!',
                 text: 'Senha atualizada com sucesso!',

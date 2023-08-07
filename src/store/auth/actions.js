@@ -122,6 +122,14 @@ export default {
     })
   },
 
+  updatePassword({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      Auth.updatePassword(payload)
+        .then((response) => resolve(response))
+        .catch((error) => reject(error))
+    })
+  },
+
   logout({ rootState }) {
     jwt.removeToken()
     jwt.removeRefreshToken()
