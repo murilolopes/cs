@@ -88,10 +88,32 @@ const updateInvestorProfile = ({}, payload) => {
   })
 }
 
+const favorite = ({}, payload) => {
+  return new Promise((resolve, reject) => {
+    const emissions = new Emissions('investidor')
+    emissions
+      .favorite(payload)
+      .then((response) => resolve(response))
+      .catch((error) => reject(error))
+  })
+}
+
+const unfavorite = ({}, payload) => {
+  return new Promise((resolve, reject) => {
+    const emissions = new Emissions('investidor')
+    emissions
+      .unfavorite(payload)
+      .then((response) => resolve(response))
+      .catch((error) => reject(error))
+  })
+}
+
 export default {
   pus,
   getDocs,
   pusGraph,
+  favorite,
+  unfavorite,
   getEmission,
   calcDesagio,
   fetchEmissions,

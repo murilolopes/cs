@@ -12,8 +12,8 @@
             @click="favoriteEmission(emission)"
             icon="HeartIcon"
             size="20"
-            class="text-secondary"
-            :class="{ 'filled-heart': emission.favorited }"
+            class="text-secondary cursor-pointer"
+            :class="{ 'filled-heart': emission.favorita }"
           />
         </div>
       </div>
@@ -124,7 +124,9 @@ export default {
     },
     favoriteEmission(emission) {
       try {
-        // this.$store.dispatch('emissions/favoriteEmission', emission)
+        const action = emission.favorita ? 'unfavorite' : 'favorite'
+        this.$store.dispatch(`investor/${action}`, emission.id)
+        this.emission.favorita = !this.emission.favorita
         // this.$emit('favoriteEmission', emission)
       } catch (error) {
         console.log(error)

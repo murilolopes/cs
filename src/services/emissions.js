@@ -29,6 +29,14 @@ class Emissions {
     return http.get(`${this.api_type}/emissoes/${payload}/pus`)
   }
 
+  favorite(payload) {
+    return http.post(`${this.api_type}/emissoes/${payload}/favoritar`)
+  }
+
+  unfavorite(payload) {
+    return http.post(`${this.api_type}/emissoes/${payload}/desfavoritar`)
+  }
+
   getDocs(payload) {
     return http.get(`${this.api_type}/emissoes/${payload}/documentos`)
   }
