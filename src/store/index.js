@@ -11,6 +11,7 @@ import firstAccess from './first-access'
 import dashboard from './dashboard'
 import admin from './admin'
 import investor from './investor'
+import publicStore from './public'
 import common from './common'
 
 Vue.use(Vuex)
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     dashboard,
     admin,
     investor,
+    publicStore,
     common,
   },
   strict: process.env.DEV,

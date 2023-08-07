@@ -108,10 +108,10 @@
   //*------------------------
 
   .navbar-container {
-    padding: 0.8rem 1rem;
+    padding: 1rem 2rem;
     // Added more horizontal padding above small screen
     @include media-breakpoint-up(sm) {
-      padding: 0.8rem 1.4rem;
+      padding: 1rem 2rem;
     }
     flex-basis: 100%;
     transition: 300ms ease all;

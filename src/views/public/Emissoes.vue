@@ -5,11 +5,7 @@
         <b-col sm="12" md="6" lg="4" xl="4">
           <b-input-group class="input-group-merge mb-2">
             <b-input-group-prepend class="cs-select">
-              <v-select
-                v-model="search"
-                :options="searchOptions"
-                :clearable="false"
-              />
+              <v-select v-model="search" :options="searchOptions" :clearable="false" />
             </b-input-group-prepend>
             <b-form-input
               id="x1"
@@ -17,10 +13,7 @@
               class="px-1"
               v-mask="'##/####'"
               @keypress.enter="updatePayload($event.target.value)"
-              v-if="
-                search.value === 'mes_emissao' ||
-                search.value === 'mes_vencimento'
-              "
+              v-if="search.value === 'mes_emissao' || search.value === 'mes_vencimento'"
             />
             <b-form-input
               id="x2"
@@ -75,23 +68,12 @@
           xl="4"
         >
           <label class="mb-0 mr-1">Mostrar</label>
-          <v-select
-            v-model="perPage"
-            :options="perPageOptions"
-            :clearable="false"
-          />
+          <v-select v-model="perPage" :options="perPageOptions" :clearable="false" />
           <label class="mr-2 ml-1">registros</label>
         </b-col>
       </b-row>
       <b-row>
-        <b-col
-          sm="6"
-          md="6"
-          lg="6"
-          xl="4"
-          v-for="(item, index) in items"
-          :key="index"
-        >
+        <b-col sm="6" md="6" lg="6" xl="4" v-for="(item, index) in items" :key="index">
           <b-card>
             <div class="emissao-card-header d-flex align-items-end mb-2">
               <b-img :src="emissaoImage(item)" class="mr-1" />
@@ -104,65 +86,47 @@
               </div>
             </div>
             <div class="emissao-card-data">
-              <div
-                class="d-flex justify-content-between border-top pt-50 pb-50"
-              >
+              <div class="d-flex justify-content-between border-top pt-50 pb-50">
                 <span> Status </span>
                 <b-badge
-                  :class="`badge badge-light-${
+                  :class="`badge badge-light-${item.is_ativo ? 'success' : 'danger'} border-${
                     item.is_ativo ? 'success' : 'danger'
-                  } border-${item.is_ativo ? 'success' : 'danger'}`"
+                  }`"
                 >
                   <span class="text-dark">
-                    {{ item.is_ativo ? "Ativo" : "Inativo" }}
+                    {{ item.is_ativo ? 'Ativo' : 'Inativo' }}
                   </span>
                 </b-badge>
               </div>
-              <div
-                class="d-flex justify-content-between border-top pt-50 pb-50"
-              >
+              <div class="d-flex justify-content-between border-top pt-50 pb-50">
                 <span> Emissão </span>
                 <strong> {{ item.numero_emissao }} </strong>
               </div>
-              <div
-                class="d-flex justify-content-between border-top pt-50 pb-50"
-              >
+              <div class="d-flex justify-content-between border-top pt-50 pb-50">
                 <span> Data da Emissão </span>
                 <strong> {{ item.data_emissao | formatDate }} </strong>
               </div>
-              <div
-                class="d-flex justify-content-between border-top pt-50 pb-50"
-              >
+              <div class="d-flex justify-content-between border-top pt-50 pb-50">
                 <span> Data do Vencimento </span>
                 <strong> {{ item.data_vencimento | formatDate }} </strong>
               </div>
-              <div
-                class="d-flex justify-content-between border-top pt-50 pb-50"
-              >
+              <div class="d-flex justify-content-between border-top pt-50 pb-50">
                 <span> Código IF B3 </span>
                 <strong> {{ item.id }} </strong>
               </div>
-              <div
-                class="d-flex justify-content-between border-top pt-50 pb-50"
-              >
+              <div class="d-flex justify-content-between border-top pt-50 pb-50">
                 <span> ISIN </span>
                 <strong> {{ item.codigo_isin }} </strong>
               </div>
-              <div
-                class="d-flex justify-content-between border-top pt-50 pb-50"
-              >
+              <div class="d-flex justify-content-between border-top pt-50 pb-50">
                 <span> Emissor </span>
                 <strong> {{ item.emissor }} </strong>
               </div>
-              <div
-                class="d-flex justify-content-between border-top pt-50 pb-50"
-              >
+              <div class="d-flex justify-content-between border-top pt-50 pb-50">
                 <span> Agente Fiduciário </span>
                 <strong> {{ item.agente_fiduciario }} </strong>
               </div>
-              <div
-                class="d-flex justify-content-between border-top pt-50 pb-50"
-              >
+              <div class="d-flex justify-content-between border-top pt-50 pb-50">
                 <span> Remuneração </span>
                 <strong> {{ item.remuneracao }} </strong>
               </div>
@@ -171,9 +135,7 @@
               <b-button
                 variant="primary"
                 class="emissoes-details-button w-100 border-primary"
-                @click="
-                  $router.push({ name: 'detalhes', params: { id: item.id } })
-                "
+                @click="$router.push({ name: 'detalhes', params: { id: item.id } })"
               >
                 <span
                   class="text-dark d-flex justify-content-center align-items-center font-weight-bolder"
@@ -224,9 +186,9 @@
 </template>
 
 <script>
-import { moneyFormat } from "@/@core/comp-functions/data_visualization/datatable";
+import { moneyFormat } from '@/@core/comp-functions/data_visualization/datatable'
 // eslint-disable-next-line import/no-cycle
-import { formatDate } from "@core/utils/filter";
+import { formatDate } from '@core/utils/filter'
 import {
   BRow,
   BCol,
@@ -240,12 +202,12 @@ import {
   BButton,
   BButtonGroup,
   BPagination,
-} from "bootstrap-vue";
-import vSelect from "vue-select";
-import { mask } from "vue-the-mask";
+} from 'bootstrap-vue'
+import vSelect from 'vue-select'
+import { mask } from 'vue-the-mask'
 
 export default {
-  name: "Emissoes",
+  name: 'Emissoes',
   components: {
     BRow,
     BCol,
@@ -271,148 +233,142 @@ export default {
       items: [],
       currentPage: 1,
       search: {
-        label: "Tipo de busca",
-        value: "",
+        label: 'Tipo de busca',
+        value: '',
       },
       searchQuery: {
-        key: "",
-        value: "",
+        key: '',
+        value: '',
       },
       perPage: 10,
       totalRows: 0,
-      selectedButton: "all",
+      selectedButton: 'all',
       searchOptions: [
         {
-          label: "Tipo de busca",
-          value: "",
+          label: 'Tipo de busca',
+          value: '',
         },
         {
-          label: "Por operação/Série",
-          value: "serie",
+          label: 'Por operação/Série',
+          value: 'serie',
         },
         {
-          label: "Por emissão",
-          value: "emissao",
+          label: 'Por emissão',
+          value: 'emissao',
         },
         {
-          label: "Por ISIN",
-          value: "codigo_isin",
+          label: 'Por ISIN',
+          value: 'codigo_isin',
         },
         {
-          label: "Por IF B3",
-          value: "codigo_cetip",
+          label: 'Por IF B3',
+          value: 'codigo_cetip',
         },
         {
-          label: "Por agente fiduciário",
-          value: "agente_fiduciario",
+          label: 'Por agente fiduciário',
+          value: 'agente_fiduciario',
         },
         {
-          label: "Por mês da emissão",
-          value: "mes_emissao",
+          label: 'Por mês da emissão',
+          value: 'mes_emissao',
         },
         {
-          label: "Por mês da vencimento",
-          value: "mes_vencimento",
+          label: 'Por mês da vencimento',
+          value: 'mes_vencimento',
         },
       ],
       perPageOptions: [10, 25, 50, 100],
-    };
+    }
   },
   mounted() {
-    this.getData();
+    this.getData()
   },
   methods: {
     updatePayload(value) {
-      this.searchQuery.key = this.search.value;
-      this.searchQuery.value = value;
+      this.searchQuery.key = this.search.value
+      this.searchQuery.value = value
     },
     async getData() {
       try {
         const { data } = await this.$store.dispatch(
-          "emissoes/fetch",
-          this.emissoesPayload
-        );
-        this.items = data.data;
-        this.currentPage = data.current_page;
-        this.totalRows = data.total;
+          'publicStore/fetchEmissions',
+          this.emissoesPayload,
+        )
+        this.items = data.data
+        this.currentPage = data.current_page
+        this.totalRows = data.total
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     },
     emissaoImage(emissao) {
       const options = {
-        cri: "cri",
-        cra: "cra",
-      };
+        cri: 'cri',
+        cra: 'cra',
+      }
 
       // eslint-disable-next-line global-require, import/no-unresolved
       if (!options[emissao.tipo_emissao.toLowerCase()])
-        return require("@/assets/images/recebíveis.svg");
+        return require('@/assets/images/recebíveis.svg')
 
       // eslint-disable-next-line import/no-dynamic-require, global-require
-      return require(`@/assets/images/${
-        options[emissao.tipo_emissao.toLowerCase()]
-      }.svg`);
+      return require(`@/assets/images/${options[emissao.tipo_emissao.toLowerCase()]}.svg`)
     },
     selectButton(type) {
-      this.selectedButton = type;
+      this.selectedButton = type
     },
   },
   computed: {
     monthMask() {
-      return this.searchQuery.value === "mes_emissao" ||
-        this.searchQuery.value === "mes_vencimento"
-        ? ["##/####"]
-        : [""];
+      return this.searchQuery.value === 'mes_emissao' || this.searchQuery.value === 'mes_vencimento'
+        ? ['##/####']
+        : ['']
     },
     emissoesPayload() {
       let payload = {
         page: this.currentPage,
         per_page: this.perPage,
-      };
+      }
 
-      if (this.selectedButton !== "all")
-        payload.tipo_emissao = this.selectedButton.toUpperCase();
+      if (this.selectedButton !== 'all') payload.tipo_emissao = this.selectedButton.toUpperCase()
       if (this.searchQuery.key && this.searchQuery.value)
-        payload[this.searchQuery.key] = this.searchQuery.value;
+        payload[this.searchQuery.key] = this.searchQuery.value
 
-      return payload;
+      return payload
     },
     selectedButtonVariant() {
       const types = {
-        all: "outline-primary",
-        cri: "outline-primary",
-        cra: "outline-primary",
-        in_progress: "outline-primary",
-      };
+        all: 'outline-primary',
+        cri: 'outline-primary',
+        cra: 'outline-primary',
+        in_progress: 'outline-primary',
+      }
 
-      types[this.selectedButton] = "primary";
+      types[this.selectedButton] = 'primary'
 
-      return types;
+      return types
     },
     showingStart() {
-      if (this.totalRows === 0) return 0;
+      if (this.totalRows === 0) return 0
 
-      return this.currentPage === 1
-        ? 1
-        : (this.currentPage - 1) * this.perPage + 1;
+      return this.currentPage === 1 ? 1 : (this.currentPage - 1) * this.perPage + 1
     },
     showingEnd() {
-      let end = this.currentPage * this.perPage;
-      if (end > this.totalRows) end = this.totalRows;
+      let end = this.currentPage * this.perPage
+      if (end > this.totalRows) end = this.totalRows
 
-      return end;
+      return end
     },
     showing() {
-      return `Mostrando de ${this.showingStart} a ${this.showingEnd} de ${this.totalRows} registros`;
+      return `Mostrando de ${this.showingStart} a ${this.showingEnd} de ${this.totalRows} registros`
     },
   },
   watch: {
     emissoesPayload() {
-      this.getData();
+      this.getData()
     },
   },
-};
+}
 </script>
 
 <style lang="scss">

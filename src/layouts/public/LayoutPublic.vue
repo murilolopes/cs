@@ -9,7 +9,7 @@
       <div class="bg-secondary d-flex justify-content-center align-items-center navbar-container">
         <div class="d-flex justify-content-between align-items-center">
           <img
-            src="/img/cs-head-logo.7bad123d.png"
+            src="@/assets/images/logo/cs-head-logo.png"
             class="mr-5"
             style="width: 195px; height: 41px; object-fit: cover"
           />
@@ -127,6 +127,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '~@core/scss/base/themes/bordered-layout.scss';
+
+.invisible-border {
+  border: 1px solid transparent;
+}
+@import '@/assets/scss/variables/_variables.scss';
+
+$primary: #1b1b1b;
+$secondary: #1b1b1b;
+
 #public-layout {
   .content {
     padding: 0;
@@ -135,5 +145,34 @@ export default {
   .content .app-content {
     padding: 0rem 2rem 0;
   }
+
+  .bg-secondary {
+    background-color: #242a32 !important;
+  }
+  ul.horizontal-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  ul.horizontal-list li {
+    display: inline;
+    margin-right: 10px;
+  }
+
+  ul.horizontal-list li a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  // ul.horizontal-list li a:visited {
+  //   color: #3FE4C6;
+  // }
+
+  ul.horizontal-list li a:hover {
+    color: #3fe4c6;
+  }
+}
+.lh-36 {
+  line-height: 36px;
 }
 </style>
