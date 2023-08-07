@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Auth from '@/services/auth'
+import Investor from '@/services/investor'
 import EconomicGroup from '@/services/economic_group'
 import Router from '@/router'
 import jwt from '@/auth/jwt/useJwt'
@@ -89,6 +90,18 @@ export default {
   createUser({ commit }, payload) {
     return new Promise((resolve, reject) => {
       Auth.createUser(payload)
+        .then((response) => {
+          resolve(response)
+        })
+        .catch((error) => {
+          reject(error)
+        })
+    })
+  },
+
+  createInvestorUser({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      Investor.createUser(payload)
         .then((response) => {
           resolve(response)
         })

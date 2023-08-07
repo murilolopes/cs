@@ -5,8 +5,8 @@ class Auth {
     return http.post('/auth', { user: payload })
   }
 
-  createUser(payload) {
-    return http.post('backoffice/cedente_user', payload)
+  createUser(user) {
+    return http.post('/auth', { user })
   }
 
   userData() {

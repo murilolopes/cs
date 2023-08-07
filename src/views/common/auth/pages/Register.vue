@@ -452,19 +452,22 @@ export default {
       try {
         const payload = {
           email: this.userEmail,
+          nome: this.userName,
+          cpf: this.cpf,
           password: this.password,
           password_confirmation: this.passwordConfirmation,
           acceptance_confirmation: this.terms,
-          privacy_policy_term_link:
+          links_termos_uso: [
             'https://policies-creditcorp-public.s3.sa-east-1.amazonaws.com/politica_privacidade.pdf',
-          use_policy_term_link:
+          ],
+          links_politicas_privacidade: [
             'https://policies-creditcorp-public.s3.sa-east-1.amazonaws.com/termos_uso.pdf',
-          token: this.$route.query.token,
+          ],
         }
 
         this.$swal.showLoading()
 
-        await this.$store.dispatch('auth/createUser', payload)
+        await this.$store.dispatch('auth/createInvestorUser', payload)
 
         this.$swal({
           title: 'Sucesso!',

@@ -25,6 +25,14 @@ export default [
       layout: 'auth',
       resource: 'Auth',
       redirectIfLoggedIn: true,
+      layoutPage: {
+        formCard: {
+          title: 'Investidor',
+          icon: require('@/assets/images/investidor/login-icon.svg'),
+        },
+        appLogoGrande: require('@/assets/images/investidor/cs-logo-login.svg'),
+        cardToMoney: require('@/assets/images/investidor/login-image.svg'),
+      },
     },
   },
   {
